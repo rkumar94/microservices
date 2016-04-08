@@ -1,6 +1,5 @@
 package juja.microservices.gamification.jersey;
 
-import com.sun.jersey.core.spi.factory.ResponseImpl;
 import juja.microservices.gamification.model.entity.User;
 import juja.microservices.gamification.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,7 @@ import java.util.List;
 
 @Component
 @Path("/user")
-public class UserControllerImpl implements UserController{
+public class UserControllerImpl implements UserController {
 
     @Autowired
     private Service service;
@@ -23,7 +22,7 @@ public class UserControllerImpl implements UserController{
     @Produces(MediaType.APPLICATION_JSON)
     @Override
     public String createUser(@PathParam("username")String userName) {
-        return service.createUser(userName);
+        return this.service.createUser(userName);
     }
 
     @GET
@@ -31,7 +30,7 @@ public class UserControllerImpl implements UserController{
     @Path("/find/{UUID}")
     @Override
     public Response getUser(@PathParam("UUID")String UUID) {
-        User user = service.getUser(UUID);
+        final User user = this.service.getUser(UUID);
         if(user != null){
             return Response.ok(user).build();
         } else {
@@ -47,7 +46,7 @@ public class UserControllerImpl implements UserController{
     @Path("/list")
     @Override
     public List<User> getUsers() {
-        return service.getUsers();
+        return this.service.getUsers();
     }
 
 }

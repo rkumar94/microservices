@@ -1,8 +1,6 @@
 package juja.microservices.gamification.jersey;
 
-
 import juja.microservices.gamification.model.entity.User;
-
 import javax.ws.rs.core.Response;
 import java.util.List;
 
