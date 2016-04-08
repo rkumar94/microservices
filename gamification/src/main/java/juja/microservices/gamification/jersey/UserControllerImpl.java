@@ -23,11 +23,7 @@ public class UserControllerImpl implements UserController{
     @Produces(MediaType.APPLICATION_JSON)
     @Override
     public String createUser(@PathParam("username")String userName) {
-        if(userName!= null && !userName.isEmpty()){
-            return service.createUser(userName);
-        } else {
-            return "userName is empty";
-        }
+        return service.createUser(userName);
     }
 
     @GET
@@ -35,12 +31,13 @@ public class UserControllerImpl implements UserController{
     @Path("/find/{UUID}")
     @Override
     public Response getUser(@PathParam("UUID")String UUID) {
-        if(UUID!= null && !UUID.isEmpty()){
-            return Response.ok(service.getUser(UUID)).build();
+        User user = service.getUser(UUID);
+        if(user != null){
+            return Response.ok(user).build();
         } else {
             return Response
                     .status(Response.Status.BAD_REQUEST)
-                    .entity("User UUID is empty")
+                    .entity(String.format("Can't find user with {%S} UUID", UUID))
                     .build();
         }
     }
