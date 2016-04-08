@@ -1,8 +1,8 @@
 package juja.microservices.gamification.model.repository;
 
 
+import juja.microservices.gamification.model.entity.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import ua.com.juja.gamification.model.entity.User;
 
 import java.util.List;
 

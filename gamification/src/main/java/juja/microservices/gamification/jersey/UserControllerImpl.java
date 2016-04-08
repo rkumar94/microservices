@@ -1,12 +1,14 @@
 package juja.microservices.gamification.jersey;
 
+import com.sun.jersey.core.spi.factory.ResponseImpl;
+import juja.microservices.gamification.model.entity.User;
+import juja.microservices.gamification.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ua.com.juja.gamification.model.entity.User;
-import ua.com.juja.gamification.service.Service;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Component
@@ -21,15 +23,26 @@ public class UserControllerImpl implements UserController{
     @Produces(MediaType.APPLICATION_JSON)
     @Override
     public String createUser(@PathParam("username")String userName) {
-        return service.createUser(userName);
+        if(userName!= null && !userName.isEmpty()){
+            return service.createUser(userName);
+        } else {
+            return "userName is empty";
+        }
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/find/{UUID}")
     @Override
-    public User getUser(@PathParam("UUID")String UUID) {
-        return service.getUser(UUID);
+    public Response getUser(@PathParam("UUID")String UUID) {
+        if(UUID!= null && !UUID.isEmpty()){
+            return Response.ok(service.getUser(UUID)).build();
+        } else {
+            return Response
+                    .status(Response.Status.BAD_REQUEST)
+                    .entity("User UUID is empty")
+                    .build();
+        }
     }
 
     @GET
