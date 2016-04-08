@@ -12,4 +12,37 @@
         <module>progress</module>
         <module>gamification</module>
     </modules>
+
+    <properties>
+        <jetty.version>8.1.3.v20120416</jetty.version>
+    </properties>
+
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>${jetty.version}</version>
+                <configuration>
+                    <webApp>
+                        <contextPath>/${artifactId}</contextPath>
+                    </webApp>
+                    <stopPort>9999</stopPort>
+                    <stopKey>foo</stopKey>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

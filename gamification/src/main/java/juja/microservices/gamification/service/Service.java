@@ -1,6 +1,7 @@
 package juja.microservices.gamification.service;
 
-import ua.com.juja.gamification.model.entity.User;
+
+import juja.microservices.gamification.model.entity.User;
 
 import java.util.List;
 
