@@ -16,15 +16,15 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
     private MongoTemplate mongoTemplate;
 
     @Override
-    public String createUser(String userName) {
-        User user = new User(userName);
+    public String createUser(String username) {
+        User user = new User(username);
         mongoTemplate.save(user);
         return user.toString();
     }
 
     @Override
-    public User getUser(String UUID) {
-        Query query = Query.query(Criteria.where("uuid").is(UUID));
+    public User getUser(String uuid) {
+        Query query = Query.query(Criteria.where("uuid").is(uuid));
         return mongoTemplate.findOne(query, User.class);
     }
 
