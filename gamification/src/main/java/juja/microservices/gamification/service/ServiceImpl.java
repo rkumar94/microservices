@@ -14,13 +14,13 @@ public class ServiceImpl implements Service {
     private UserRepository userRepository;
 
     @Override
-    public String createUser(String userName){
-        return userRepository.createUser(userName);
+    public String createUser(String username){
+        return userRepository.createUser(username);
     }
 
     @Override
-    public User getUser(String UUID) {
-        return userRepository.getUser(UUID);
+    public User getUser(String uuid) {
+        return userRepository.getUser(uuid);
     }
 
     @Override

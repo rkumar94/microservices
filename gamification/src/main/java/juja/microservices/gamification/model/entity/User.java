@@ -11,35 +11,31 @@ public class User {
     @Id
     private String id;
     private String uuid;
-    private String userName;
+    private String username;
 
     public User() {
     }
 
     @PersistenceConstructor
-    public User(String userName) {
-        this.userName = userName;
-        this.uuid = generateUUID();
+    public User(final String username) {
+        this.username = username;
+        this.uuid = UUID.randomUUID().toString();
     }
 
     public String getUuid() {
-        return uuid;
+        return this.uuid;
     }
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    private String generateUUID(){
-        return UUID.randomUUID().toString();
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setId(String id) {
@@ -61,7 +57,7 @@ public class User {
 
         if (id != null ? !id.equals(user.id) : user.id != null) return false;
         if (uuid != null ? !uuid.equals(user.uuid) : user.uuid != null) return false;
-        return userName != null ? userName.equals(user.userName) : user.userName == null;
+        return username != null ? username.equals(user.username) : user.username == null;
 
     }
 
@@ -69,7 +65,7 @@ public class User {
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (uuid != null ? uuid.hashCode() : 0);
-        result = 31 * result + (userName != null ? userName.hashCode() : 0);
+        result = 31 * result + (username != null ? username.hashCode() : 0);
         return result;
     }
 
@@ -78,7 +74,7 @@ public class User {
         return "User{" +
                 "id='" + id + '\'' +
                 ", uuid='" + uuid + '\'' +
-                ", userName='" + userName + '\'' +
+                ", username='" + username + '\'' +
                 '}';
     }
 }
