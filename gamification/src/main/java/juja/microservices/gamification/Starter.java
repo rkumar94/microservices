@@ -28,37 +28,44 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+package juja.microservices.gamification;
 
-package juja.microservices.gamification.model.repository;
-
-import java.util.List;
-import juja.microservices.gamification.model.entity.User;
+import java.io.PrintStream;
 
 /**
- * User custom repository interface
- * @author Sergii Lisnychyi (ljore@ukr.net)
+ * Main entry point to application.
+ * @author Viktor Kuchyn (kuchin.victor@gmail.com)
  * @version $Id$
  * @since 1.0
+ * @todo Add web-server launch from main method in future
  */
-public interface UserRepositoryCustom {
+public final class Starter {
 
     /**
-     * Create user.
-     * @param username username
-     * @return Info about created user
+     * Printer.
      */
-    String createUser(String username);
+    private final transient PrintStream printer;
 
     /**
-     * Get user by uuid.
-     * @param uuid uuid
-     * @return User
+     * Constructor.
+     * @param prntr Printer
      */
-    User getUser(String uuid);
+    public Starter(final PrintStream prntr) {
+        this.printer = prntr;
+    }
 
     /**
-     * Get list of all users.
-     * @return List of users
+     * Main method.
+     * @param args Application arguments
      */
-    List<User> getUsers();
+    public static void main(final String...args) {
+        new Starter(System.out).start();
+    }
+
+    /**
+     * Starts the application.
+     */
+    public void start() {
+        this.printer.println("started application");
+    }
 }
