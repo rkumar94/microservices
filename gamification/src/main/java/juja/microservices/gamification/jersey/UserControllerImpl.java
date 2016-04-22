@@ -30,21 +30,20 @@
  */
 package juja.microservices.gamification.jersey;
 
+import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 import juja.microservices.gamification.model.entity.User;
 import juja.microservices.gamification.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
 /**
- * Rest requests to operate with users
+ * Rest requests to operate with users.
  * @author Sergii Lisnychyi (ljore@ukr.net)
  * @version $Id$
  * @since 1.0
@@ -61,36 +60,41 @@ public class UserControllerImpl {
 
     /**
      * Create user.
-     * @param username username
+     * @param name Username
+     * @return Information about created user
      */
     @GET
     @Path("/create/{username}")
     @Produces(MediaType.APPLICATION_JSON)
-    public final String createUser(@PathParam("username") final String username) {
-        return this.service.createUser(username);
+    public final String createUser(@PathParam("username") final String name) {
+        return this.service.createUser(name);
     }
 
     /**
      * Get user by uuid.
-     * @param uuid uuid
+     * @param uuid Uuid
+     * @return User
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/find/{UUID}")
-    public final Response getUser( @PathParam("UUID") final String uuid) {
+    public final Response getUser(@PathParam("UUID") final String uuid) {
         final User user = this.service.getUser(uuid);
+        Response result;
         if (user != null) {
-            return Response.ok(user).build();
+            result = Response.ok(user).build();
         } else {
-            return Response
+            result = Response
                     .status(Response.Status.BAD_REQUEST)
                     .entity(String.format("Can't find user {%S} uuid", uuid))
                     .build();
         }
+        return result;
     }
 
     /**
      * Get list of all users.
+     * @return List of users
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)

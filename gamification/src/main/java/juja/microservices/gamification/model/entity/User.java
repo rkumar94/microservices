@@ -31,12 +31,13 @@
 package juja.microservices.gamification.model.entity;
 
 import java.util.UUID;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * User entity
+ * User entity.
  * @author Sergii Lisnychyi (ljore@ukr.net)
  * @version $Id$
  * @since 1.0
@@ -66,6 +67,7 @@ public class User {
 
     /**
      * User persistence constructor.
+     * @param username Username
      */
     @PersistenceConstructor
     public User(final String username) {
@@ -75,6 +77,7 @@ public class User {
 
     /**
      * Get uuid.
+     * @return Uuid
      */
     public String getUuid() {
         return this.uuid;
@@ -82,6 +85,7 @@ public class User {
 
     /**
      * Set uuid.
+     * @param uuid Uuid
      */
     public void setUuid(final String uuid) {
         this.uuid = uuid;
@@ -89,6 +93,7 @@ public class User {
 
     /**
      * Get username.
+     * @return Username
      */
     public String getUsername() {
         return this.username;
@@ -96,6 +101,7 @@ public class User {
 
     /**
      * Set username.
+     * @param username Username
      */
     public void setUsername(final String username) {
         this.username = username;
@@ -103,6 +109,7 @@ public class User {
 
     /**
      * Set id.
+     * @param id Id
      */
     public void setId(final String id) {
         this.id = id;
@@ -110,28 +117,26 @@ public class User {
 
     /**
      * Get id.
+     * @return Id
      */
     public String getId() {
-        return id;
+        return this.id;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
+    public boolean equals(final Object obj) {
+        boolean result = false;
+        if (this == obj) {
+            result = true;
         }
-
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        if (obj == null || getClass() != obj.getClass()) {
+            result = false;
         }
-
-        User user = (User) o;
-
-        return new org.apache.commons.lang.builder.EqualsBuilder()
-                .append(id, user.id)
-                .append(uuid, user.uuid)
-                .append(username, user.username)
-                .isEquals();
+        final User user = (User) obj;
+        assert user != null;
+        return result || java.util.Objects.equals(this.id, user.id) &&
+                java.util.Objects.equals(this.uuid, user.uuid) &&
+                java.util.Objects.equals(this.username, user.username);
     }
 
     @Override
@@ -143,14 +148,13 @@ public class User {
                 .toHashCode();
     }
 
-
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("User{");
-        sb.append("id='").append(id).append('\'');
-        sb.append(", uuid='").append(this.uuid).append('\'');
-        sb.append(", username='").append(this.username).append('\'');
-        sb.append('}');
-        return sb.toString();
+        final StringBuilder sbuilider = new StringBuilder("User{");
+        sbuilider.append("id='").append(this.id).append('\'');
+        sbuilider.append(", uuid='").append(this.uuid).append('\'');
+        sbuilider.append(", username='").append(this.username).append('\'');
+        sbuilider.append('}');
+        return sbuilider.toString();
     }
 }
