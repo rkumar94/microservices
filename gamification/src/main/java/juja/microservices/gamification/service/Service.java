@@ -35,7 +35,7 @@ import java.util.List;
 import juja.microservices.gamification.model.entity.User;
 
 /**
- * User service interface
+ * User service interface.
  * @author Sergii Lisnychyi (ljore@ukr.net)
  * @version $Id$
  * @since 1.0
@@ -44,14 +44,14 @@ public interface Service {
 
     /**
      * Create user.
-     * @param username username
+     * @param username Username
      * @return Info about created user
      */
     String createUser(String username);
 
     /**
      * Get user by uuid.
-     * @param uuid uuid
+     * @param uuid Uuid
      * @return User
      */
     User getUser(String uuid);

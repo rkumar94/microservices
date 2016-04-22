@@ -36,23 +36,24 @@ import juja.microservices.gamification.model.entity.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
- * User repository interface
+ * User repository interface.
  * @author Sergii Lisnychyi (ljore@ukr.net)
  * @version $Id$
  * @since 1.0
  */
-public interface UserRepository extends MongoRepository<User, String>, UserRepositoryCustom {
+public interface UserRepository
+        extends MongoRepository<User, String>, UserRepositoryCustom {
 
     /**
      * Create user.
-     * @param username username
+     * @param username Username
      * @return Info about created user
      */
     String createUser(String username);
 
     /**
      * Get user by uuid.
-     * @param uuid uuid
+     * @param uuid Uuid
      * @return User
      */
     User getUser(String uuid);

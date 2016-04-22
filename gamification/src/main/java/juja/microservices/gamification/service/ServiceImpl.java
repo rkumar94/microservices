@@ -38,8 +38,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * Serving user actions
- * @author Sergii Lisnychyi
+ * Serving user actions.
+ * @author Sergii Lisnychyi (ljore@ukr.net)
  * @version $Id$
  * @since 1.0
  *
@@ -51,21 +51,21 @@ public class ServiceImpl implements Service {
      * UserRepository.
      */
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository repository;
 
     @Override
-    public String createUser(String username){
-        return this.userRepository.createUser(username);
+    public String createUser(final String username) {
+        return this.repository.createUser(username);
     }
 
     @Override
-    public User getUser(String uuid) {
-        return this.userRepository.getUser(uuid);
+    public User getUser(final String uuid) {
+        return this.repository.getUser(uuid);
     }
 
     @Override
     public List<User> getUsers() {
-        return this.userRepository.getUsers();
+        return this.repository.getUsers();
     }
 
 
