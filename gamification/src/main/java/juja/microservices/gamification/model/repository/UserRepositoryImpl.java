@@ -40,7 +40,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 /**
- * User custom repository implementation
+ * User custom repository implementation.
  * @author Sergii Lisnychyi (ljore@ukr.net)
  * @version $Id$
  * @since 1.0
@@ -55,20 +55,20 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
     private MongoTemplate template;
 
     @Override
-    public String createUser(final String username) {
+    public final String createUser(final String username) {
         final User user = new User(username);
         this.template.save(user);
         return user.toString();
     }
 
     @Override
-    public User getUser(final String uuid) {
+    public final User getUser(final String uuid) {
         final Query query = Query.query(Criteria.where("uuid").is(uuid));
         return this.template.findOne(query, User.class);
     }
 
     @Override
-    public List<User> getUsers() {
+    public final List<User> getUsers() {
         return this.template.findAll(User.class);
     }
 }
