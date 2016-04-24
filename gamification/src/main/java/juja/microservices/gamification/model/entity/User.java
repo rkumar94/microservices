@@ -30,8 +30,10 @@
  */
 package juja.microservices.gamification.model.entity;
 
+import java.util.Objects;
 import java.util.UUID;
 
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -79,52 +81,52 @@ public class User {
      * Get uuid.
      * @return Uuid
      */
-    public String getUuid() {
+    public final String getUuid() {
         return this.uuid;
     }
 
     /**
      * Set uuid.
-     * @param uuid Uuid
+     * @param inuuid Uuid
      */
-    public void setUuid(final String uuid) {
-        this.uuid = uuid;
+    public final void setUuid(final String inuuid) {
+        this.uuid = inuuid;
     }
 
     /**
      * Get username.
      * @return Username
      */
-    public String getUsername() {
+    public final String getUsername() {
         return this.username;
     }
 
     /**
      * Set username.
-     * @param username Username
+     * @param name Username
      */
-    public void setUsername(final String username) {
-        this.username = username;
+    public final void setUsername(final String name) {
+        this.username = name;
     }
 
     /**
      * Set id.
-     * @param id Id
+     * @param inid Id
      */
-    public void setId(final String id) {
-        this.id = id;
+    public final void setId(final String inid) {
+        this.id = inid;
     }
 
     /**
      * Get id.
      * @return Id
      */
-    public String getId() {
+    public final String getId() {
         return this.id;
     }
 
     @Override
-    public boolean equals(final Object obj) {
+    public final boolean equals(final Object obj) {
         boolean result = false;
         if (this == obj) {
             result = true;
@@ -134,14 +136,16 @@ public class User {
         }
         final User user = (User) obj;
         assert user != null;
-        return result || java.util.Objects.equals(this.id, user.id) &&
-                java.util.Objects.equals(this.uuid, user.uuid) &&
-                java.util.Objects.equals(this.username, user.username);
+        return result || Objects.equals(this.id, user.id)
+                && Objects.equals(this.uuid, user.uuid)
+                && Objects.equals(this.username, user.username);
     }
 
     @Override
-    public int hashCode() {
-        return new org.apache.commons.lang.builder.HashCodeBuilder(17, 37)
+    public final int hashCode() {
+        final int prime = 17;
+        final int secprime = 37;
+        return new HashCodeBuilder(prime, secprime)
                 .append(this.id)
                 .append(this.uuid)
                 .append(this.username)
@@ -149,7 +153,7 @@ public class User {
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         final StringBuilder sbuilider = new StringBuilder("User{");
         sbuilider.append("id='").append(this.id).append('\'');
         sbuilider.append(", uuid='").append(this.uuid).append('\'');

@@ -30,12 +30,11 @@
  */
 package juja.microservices.gamification.service;
 
+import java.util.List;
 import juja.microservices.gamification.model.entity.User;
 import juja.microservices.gamification.model.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * Serving user actions.
@@ -54,19 +53,18 @@ public class ServiceImpl implements Service {
     private UserRepository repository;
 
     @Override
-    public String createUser(final String username) {
+    public final String createUser(final String username) {
         return this.repository.createUser(username);
     }
 
     @Override
-    public User getUser(final String uuid) {
+    public final User getUser(final String uuid) {
         return this.repository.getUser(uuid);
     }
 
     @Override
-    public List<User> getUsers() {
+    public final List<User> getUsers() {
         return this.repository.getUsers();
     }
-
 
 }
