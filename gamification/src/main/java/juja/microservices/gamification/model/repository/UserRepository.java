@@ -42,7 +42,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * @since 1.0
  */
 public interface UserRepository
-        extends MongoRepository<User, String>, UserRepositoryCustom {
+    extends MongoRepository<User, String>, UserRepositoryCustom {
 
     /**
      * Create user.

@@ -217,13 +217,15 @@
             <build>
                 <finalName>${artifactId}</finalName>
                 <plugins>
-
                     <plugin>
                         <groupId>com.qulice</groupId>
                         <artifactId>qulice-maven-plugin</artifactId>
                         <version>0.16</version>
                         <configuration>
                             <license>file:${basedir}/LICENSE.txt</license>
+                            <excludes>
+                                <exclude>checkstyle:/src/main/webapp/.*</exclude>
+                            </excludes>
                         </configuration>
                         <executions>
                             <execution>
