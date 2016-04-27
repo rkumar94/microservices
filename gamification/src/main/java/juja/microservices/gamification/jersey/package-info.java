@@ -30,9 +30,9 @@
  */
 
 /**
- * Gamification starter class.
- * @author Viktor Kuchyn (kuchin.victor@gmail.com)
+ * Jersey controllers.
+ * @author Sergii Lisnychyi (ljore@ukr.net)
  * @version $Id$
  * @since 1.0
  */
-package juja.microservices.gamification;
+package juja.microservices.gamification.jersey;

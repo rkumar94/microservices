@@ -29,10 +29,46 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+package juja.microservices.gamification.model.repository;
+
+import java.util.List;
+import juja.microservices.gamification.model.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Repository;
+
 /**
- * Gamification starter class.
- * @author Viktor Kuchyn (kuchin.victor@gmail.com)
+ * User custom repository implementation.
+ * @author Sergii Lisnychyi (ljore@ukr.net)
  * @version $Id$
  * @since 1.0
  */
-package juja.microservices.gamification;
+@Repository
+public class UserRepositoryImpl implements UserRepositoryCustom {
+
+    /**
+     * MongoTemplate.
+     */
+    @Autowired
+    private MongoTemplate template;
+
+    @Override
+    public final String createUser(final String username) {
+        final User user = new User(username);
+        this.template.save(user);
+        return user.toString();
+    }
+
+    @Override
+    public final User getUser(final String uuid) {
+        final Query query = Query.query(Criteria.where("uuid").is(uuid));
+        return this.template.findOne(query, User.class);
+    }
+
+    @Override
+    public final List<User> getUsers() {
+        return this.template.findAll(User.class);
+    }
+}
