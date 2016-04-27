@@ -32,7 +32,6 @@ package juja.microservices.gamification.model.entity;
 
 import java.util.Objects;
 import java.util.UUID;
-
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
@@ -137,8 +136,8 @@ public class User {
         final User user = (User) obj;
         assert user != null;
         return result || Objects.equals(this.id, user.id)
-                && Objects.equals(this.uuid, user.uuid)
-                && Objects.equals(this.username, user.username);
+            && Objects.equals(this.uuid, user.uuid)
+            && Objects.equals(this.username, user.username);
     }
 
     @Override
@@ -146,10 +145,10 @@ public class User {
         final int prime = 17;
         final int secprime = 37;
         return new HashCodeBuilder(prime, secprime)
-                .append(this.id)
-                .append(this.uuid)
-                .append(this.username)
-                .toHashCode();
+            .append(this.id)
+            .append(this.uuid)
+            .append(this.username)
+            .toHashCode();
     }
 
     @Override
