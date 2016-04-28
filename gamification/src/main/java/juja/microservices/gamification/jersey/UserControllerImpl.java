@@ -66,8 +66,17 @@ public class UserControllerImpl {
     @GET
     @Path("/create/{username}")
     @Produces(MediaType.APPLICATION_JSON)
-    public final String createUser(@PathParam("username") final String name) {
-        return this.service.createUser(name);
+    public final Response createUser(@PathParam("username") final String name) {
+        final String user = this.service.createUser(name);
+        final Response result;
+        if (user != null) {
+            final String message = String.format("created with name=%s", user);
+            result = Response.ok(message).build();
+        } else {
+            result = Response.status(Response.Status.BAD_REQUEST)
+                .entity("can't create user.").build();
+        }
+        return result;
     }
 
     /**
