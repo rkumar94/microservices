@@ -58,7 +58,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
     public final String createUser(final String username) {
         final User user = new User(username);
         this.template.save(user);
-        return user.toString();
+        return user.getUsername();
     }
 
     @Override
