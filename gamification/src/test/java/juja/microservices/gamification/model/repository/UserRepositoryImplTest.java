@@ -31,7 +31,7 @@
 package juja.microservices.gamification.model.repository;
 
 import juja.microservices.gamification.model.entity.User;
-import org.junit.Assert;
+import org.hamcrest.MatcherAssert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -41,6 +41,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import static org.hamcrest.CoreMatchers.is;
 
 /**
  * User repository test.
@@ -79,7 +80,7 @@ public class UserRepositoryImplTest {
         final String name = "name";
         final User user = new User(name);
         final String result = this.repository.createUser(name);
-        Assert.assertEquals(user.getUsername(), result);
+        MatcherAssert.assertThat(user.getUsername(), is(result));
     }
 
     /**

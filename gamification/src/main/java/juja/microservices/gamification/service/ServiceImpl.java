@@ -41,7 +41,6 @@ import org.springframework.stereotype.Component;
  * @author Sergii Lisnychyi (ljore@ukr.net)
  * @version $Id$
  * @since 1.0
- *
  */
 @Component
 public class ServiceImpl implements Service {
