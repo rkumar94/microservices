@@ -105,6 +105,16 @@
             <artifactId>jetty-webapp</artifactId>
             <version>${jetty.version}</version>
             <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.eclipse.jetty.orbit</groupId>
+                    <artifactId>com.sun.el</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.jetty.orbit</groupId>
+                    <artifactId>javax.servlet.jsp.jstl</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
@@ -139,6 +149,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${org.springframework.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -167,6 +178,12 @@
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-json</artifactId>
             <version>1.8</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>stax</groupId>
+                    <artifactId>stax-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -214,8 +231,6 @@
             <artifactId>commons-lang</artifactId>
             <version>2.6</version>
         </dependency>
-
-
     </dependencies>
 
     <profiles>
@@ -227,12 +242,15 @@
                     <plugin>
                         <groupId>com.qulice</groupId>
                         <artifactId>qulice-maven-plugin</artifactId>
-                        <version>0.16</version>
+                        <version>0.16.2</version>
                         <configuration>
                             <license>file:${basedir}/LICENSE.txt</license>
                             <excludes>
                                 <exclude>checkstyle:/src/main/webapp/.*</exclude>
                                 <exclude>checkstyle:/src/test/.*</exclude>
+                                <exclude>xml:/src/main/webapp/WEB-INF/application-context.xml</exclude>
+                                <exclude>xml:/src/main/webapp/WEB-INF/web.xml</exclude>
+                                <exclude>duplicatefinder:.*</exclude>
                             </excludes>
                         </configuration>
                         <executions>
