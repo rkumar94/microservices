@@ -47,6 +47,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class User {
 
     /**
+     * Capacity of String object interpretation.
+     */
+    public static final int TOSTRING_CAPACITY = 50;
+    /**
      * Id field.
      */
     @Id
@@ -56,7 +60,7 @@ public class User {
      */
     private String uuid;
     /**
-     * USername field.
+     * Username field.
      */
     private String username;
 
@@ -64,6 +68,7 @@ public class User {
      * User constructor by default.
      */
     public User() {
+        super();
     }
 
     /**
@@ -153,11 +158,12 @@ public class User {
 
     @Override
     public final String toString() {
-        final StringBuilder sbuilider = new StringBuilder("User{");
-        sbuilider.append("id='").append(this.id).append('\'');
-        sbuilider.append(", uuid='").append(this.uuid).append('\'');
-        sbuilider.append(", username='").append(this.username).append('\'');
-        sbuilider.append('}');
+        final StringBuilder sbuilider = new StringBuilder(
+            User.TOSTRING_CAPACITY
+        ).append("User{id='").append(this.id).append('\'')
+            .append(", uuid='").append(this.uuid).append('\'')
+            .append(", username='").append(this.username).append('\'')
+            .append('}');
         return sbuilider.toString();
     }
 }

@@ -28,42 +28,11 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package juja.microservices.gamification.service;
-
-import java.util.List;
-import juja.microservices.gamification.model.entity.User;
-import juja.microservices.gamification.model.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
- * Serving user actions.
- * @author Sergii Lisnychyi (ljore@ukr.net)
+ * Gamification starter class.
+ * @author Viktor Kuchyn (kuchin.victor@gmail.com)
  * @version $Id$
  * @since 1.0
  */
-@Component
-public class ServiceImpl implements Service {
-
-    /**
-     * UserRepository.
-     */
-    @Autowired
-    private UserRepository repository;
-
-    @Override
-    public final String createUser(final String username) {
-        return this.repository.createUser(username);
-    }
-
-    @Override
-    public final User getUser(final String uuid) {
-        return this.repository.getUser(uuid);
-    }
-
-    @Override
-    public final List<User> getUsers() {
-        return this.repository.getUsers();
-    }
-
-}
+package juja.microservices.gamification.jersey;

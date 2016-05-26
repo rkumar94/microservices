@@ -44,6 +44,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * Rest requests to operate with users.
+ *
  * @author Sergii Lisnychyi (ljore@ukr.net)
  * @version $Id$
  * @since 1.0
@@ -56,7 +57,7 @@ public class UserControllerImpl {
      * Service.
      */
     @Autowired
-    private Service service;
+    private transient Service service;
 
     /**
      * Create user.
@@ -66,8 +67,17 @@ public class UserControllerImpl {
     @GET
     @Path("/create/{username}")
     @Produces(MediaType.APPLICATION_JSON)
-    public final String createUser(@PathParam("username") final String name) {
-        return this.service.createUser(name);
+    public final Response createUser(@PathParam("username") final String name) {
+        final String user = this.service.createUser(name);
+        final Response result;
+        if (user == null) {
+            result = Response.status(Response.Status.BAD_REQUEST)
+                .entity("can't create user.").build();
+        } else {
+            final String message = String.format("created with name=%s", user);
+            result = Response.ok(message).build();
+        }
+        return result;
     }
 
     /**
@@ -80,18 +90,19 @@ public class UserControllerImpl {
     @Path("/find/{UUID}")
     public final Response getUser(@PathParam("UUID") final String uuid) {
         final User user = this.service.getUser(uuid);
-        Response result;
-        if (user != null) {
-            result = Response.ok(user).build();
-        } else {
+        final Response result;
+        if (user == null) {
             result = Response.status(Response.Status.BAD_REQUEST)
                 .entity(String.format("no user with %s uuid", uuid)).build();
+        } else {
+            result = Response.ok(user).build();
         }
         return result;
     }
 
     /**
      * Get list of all users.
+     *
      * @return List of users
      */
     @GET
