@@ -1,0 +1,17 @@
+language: java
+jdk:
+ - oraclejdk8
+sudo: required
+services:
+  - docker
+cache:
+  directories:
+    - $HOME/.m2
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+before_install:
+  - cd simple-slack-api/
+  - gradle clean install
+  - cd ../
+script:
+  - mvn clean install -Pqulice
