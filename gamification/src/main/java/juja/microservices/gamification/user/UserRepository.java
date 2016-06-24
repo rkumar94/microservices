@@ -29,18 +29,17 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-package juja.microservices.gamification.service;
+package juja.microservices.gamification.user;
 
 import java.util.List;
-import juja.microservices.gamification.model.entity.User;
 
 /**
- * User service interface.
+ * User custom repository interface.
  * @author Sergii Lisnychyi (ljore@ukr.net)
  * @version $Id$
  * @since 1.0
  */
-public interface Service {
+public interface UserRepository {
 
     /**
      * Create user.
@@ -50,7 +49,7 @@ public interface Service {
     String createUser(String username);
 
     /**
-     * Get user by uuid.
+     * Get user by Uuid.
      * @param uuid Uuid
      * @return User
      */
