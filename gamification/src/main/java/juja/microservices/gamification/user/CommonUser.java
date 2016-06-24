@@ -93,10 +93,6 @@ public class CommonUser implements User {
         this.uuid = inuuid;
     }
 
-    /**
-     * Get username.
-     * @return Username
-     */
     @Override
     public final String getUsername() {
         return this.username;
