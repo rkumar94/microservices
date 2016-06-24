@@ -29,38 +29,45 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-package juja.microservices.gamification.model.repository;
+package juja.microservices.gamification.user;
 
 import java.util.List;
-import juja.microservices.gamification.model.entity.User;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Repository;
 
 /**
- * User repository interface.
+ * User custom repository implementation.
  * @author Sergii Lisnychyi (ljore@ukr.net)
  * @version $Id$
  * @since 1.0
  */
-public interface UserRepository
-    extends MongoRepository<User, String>, UserRepositoryCustom {
+@Repository
+public class UserRepositoryImpl implements UserRepository {
 
     /**
-     * Create user.
-     * @param username Username
-     * @return Info about created user
+     * MongoTemplate.
      */
-    String createUser(String username);
+    @Autowired
+    private transient MongoTemplate template;
 
-    /**
-     * Get user by uuid.
-     * @param uuid Uuid
-     * @return User
-     */
-    User getUser(String uuid);
+    @Override
+    public final String createUser(final String username) {
+        final User user = new CommonUser(username);
+        this.template.save(user);
+        return user.getUsername();
+    }
 
-    /**
-     * Get list of all users.
-     * @return List of users
-     */
-    List<User> getUsers();
+    @Override
+    public final User getUser(final String uuid) {
+        final Query query = Query.query(Criteria.where("uuid").is(uuid));
+        return this.template.findOne(query, CommonUser.class);
+    }
+
+    @Override
+    public final List<User> getUsers() {
+        return this.template.findAll(User.class);
+    }
 }

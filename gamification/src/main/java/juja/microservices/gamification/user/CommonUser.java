@@ -28,7 +28,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package juja.microservices.gamification.model.entity;
+package juja.microservices.gamification.user;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -44,12 +44,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @since 1.0
  */
 @Document(collection = "users")
-public class User {
+public class CommonUser implements User {
 
-    /**
-     * Capacity of String object interpretation.
-     */
-    public static final int TOSTRING_CAPACITY = 50;
     /**
      * Id field.
      */
@@ -65,18 +61,18 @@ public class User {
     private String username;
 
     /**
-     * User constructor by default.
+     * CommonUser constructor by default.
      */
-    public User() {
+    public CommonUser() {
         super();
     }
 
     /**
-     * User persistence constructor.
+     * CommonUser persistence constructor.
      * @param username Username
      */
     @PersistenceConstructor
-    public User(final String username) {
+    public CommonUser(final String username) {
         this.username = username;
         this.uuid = UUID.randomUUID().toString();
     }
@@ -101,6 +97,7 @@ public class User {
      * Get username.
      * @return Username
      */
+    @Override
     public final String getUsername() {
         return this.username;
     }
@@ -138,7 +135,7 @@ public class User {
         if (obj == null || getClass() != obj.getClass()) {
             result = false;
         }
-        final User user = (User) obj;
+        final CommonUser user = (CommonUser) obj;
         assert user != null;
         return result || Objects.equals(this.id, user.id)
             && Objects.equals(this.uuid, user.uuid)
@@ -159,8 +156,8 @@ public class User {
     @Override
     public final String toString() {
         final StringBuilder sbuilider = new StringBuilder(
-            User.TOSTRING_CAPACITY
-        ).append("User{id='").append(this.id).append('\'')
+            CommonUser.TOSTRING_CAPACITY
+        ).append("CommonUser{id='").append(this.id).append('\'')
             .append(", uuid='").append(this.uuid).append('\'')
             .append(", username='").append(this.username).append('\'')
             .append('}');

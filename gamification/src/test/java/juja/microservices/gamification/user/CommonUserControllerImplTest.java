@@ -28,13 +28,11 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package juja.microservices.gamification.jersey;
+package juja.microservices.gamification.user;
 
 import java.util.Collections;
 import java.util.List;
 import javax.ws.rs.core.Response;
-import juja.microservices.gamification.model.entity.User;
-import juja.microservices.gamification.service.Service;
 import org.junit.Assert;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -44,21 +42,21 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
- * User controller test.
+ * CommonUser controller test.
  * @author Sergii Lisnychyi (ljore@ukr.net)
  * @version $Id$
  * @since 1.0
  */
-public class UserControllerImplTest {
+public class CommonUserControllerImplTest {
 
     /**
-     * User controller.
+     * CommonUser controller.
      */
     @InjectMocks
     private transient UserControllerImpl controller;
 
     /**
-     * User service.
+     * CommonUser service.
      */
     @Mock
     private transient Service service;
@@ -93,11 +91,11 @@ public class UserControllerImplTest {
     @Test
     public final void getUserWithCorrectUuid() throws Exception {
         final String uuid = "12345";
-        final User user = new User();
-        user.setUuid(uuid);
-        Mockito.when(this.service.getUser(uuid)).thenReturn(user);
+        final CommonUser commonUser = new CommonUser();
+        commonUser.setUuid(uuid);
+        Mockito.when(this.service.getUser(uuid)).thenReturn(commonUser);
         final Response resp = this.controller.getUser(uuid);
-        final Response expected = Response.ok(user).build();
+        final Response expected = Response.ok(commonUser).build();
         Assert.assertEquals(expected.getStatus(), resp.getStatus());
         Assert.assertEquals(expected.getEntity(), resp.getEntity());
     }
@@ -119,7 +117,7 @@ public class UserControllerImplTest {
      */
     @Test
     public final void getUsersVerify() {
-        final List<User> users = Collections.singletonList(new User());
+        final List<User> users = Collections.singletonList(new CommonUser());
         Mockito.when(this.service.getUsers()).thenReturn(users);
         final List<User> result = this.controller.getUsers();
         Mockito.verify(this.service, Mockito.times(1)).getUsers();

@@ -28,7 +28,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package juja.microservices.gamification.jersey;
+package juja.microservices.gamification.user;
 
 import java.util.List;
 import javax.ws.rs.GET;
@@ -37,8 +37,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import juja.microservices.gamification.model.entity.User;
-import juja.microservices.gamification.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -28,9 +28,8 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package juja.microservices.gamification.model.repository;
+package juja.microservices.gamification.user;
 
-import juja.microservices.gamification.model.entity.User;
 import org.hamcrest.MatcherAssert;
 import org.junit.Before;
 import org.junit.Test;
@@ -44,15 +43,15 @@ import org.springframework.data.mongodb.core.query.Query;
 import static org.hamcrest.CoreMatchers.is;
 
 /**
- * User repository test.
+ * CommonUser repository test.
  * @author Sergii Lisnychyi (ljore@ukr.net)
  * @version $Id$
  * @since 1.0
  */
-public class UserRepositoryImplTest {
+public class CommonUserRepositoryImplMongoImplTest {
 
     /**
-     * User repository.
+     * CommonUser repository.
      */
     @InjectMocks
     private UserRepositoryImpl repository;
@@ -78,9 +77,9 @@ public class UserRepositoryImplTest {
     @Test
     public final void createUser() throws Exception {
         final String name = "name";
-        final User user = new User(name);
+        final CommonUser commonUser = new CommonUser(name);
         final String result = this.repository.createUser(name);
-        MatcherAssert.assertThat(user.getUsername(), is(result));
+        MatcherAssert.assertThat(commonUser.getUsername(), is(result));
     }
 
     /**
@@ -91,7 +90,7 @@ public class UserRepositoryImplTest {
         final String uuid = "uuid";
         final Query query = Query.query(Criteria.where(uuid).is(uuid));
         this.repository.getUser(uuid);
-        Mockito.verify(this.templ, Mockito.times(1)).findOne(query, User.class);
+        Mockito.verify(this.templ, Mockito.times(1)).findOne(query, CommonUser.class);
     }
 
     /**
@@ -100,7 +99,7 @@ public class UserRepositoryImplTest {
     @Test
     public final void getUsersVerify() {
         this.repository.getUsers();
-        Mockito.verify(this.templ, Mockito.times(1)).findAll(User.class);
+        Mockito.verify(this.templ, Mockito.times(1)).findAll(CommonUser.class);
     }
 
 }

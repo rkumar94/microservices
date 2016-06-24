@@ -30,9 +30,9 @@
  */
 
 /**
- * Gamification starter class.
+ * Package with user functionality, controllers, repository.
  * @author Viktor Kuchyn (kuchin.victor@gmail.com)
  * @version $Id$
  * @since 1.0
  */
-package juja.microservices.gamification.jersey;
+package juja.microservices.gamification.user;
