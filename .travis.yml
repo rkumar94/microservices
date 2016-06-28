@@ -1,7 +1,8 @@
 language: java
 jdk:
- - oraclejdk8
-sudo: required
+  - oraclejdk8
+env:
+  - TRAVIS_NODE_VERSION="4.4"
 services:
   - docker
 cache:
@@ -13,5 +14,21 @@ before_install:
   - cd simple-slack-api/
   - gradle clean install
   - cd ../
+  - rm -rf ~/.nvm
+  - git clone https://github.com/creationix/nvm.git $HOME/.nvm
+  - cd $HOME/.nvm
+  - git checkout `git describe --abbrev=0 --tags`
+  - cd ../
+  - . $HOME/.nvm/nvm.sh
+  - nvm install $TRAVIS_NODE_VERSION
+  - nvm use $TRAVIS_NODE_VERSION
+install:
+  - cd gamification-ui/
+  - npm install
+  - cd ../
+before_script:
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
 script:
   - mvn clean install -Pqulice
+  - gamification-ui/node_modules/.bin/karma start gamification-ui/karma.conf.js --no-auto-watch --single-run --reporters=dots --browsers=Firefox
