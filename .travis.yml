@@ -13,19 +13,16 @@ cache:
 before_install:
   - cd simple-slack-api/
   - gradle clean install
-  - cd ../
+  - cd ../ && pwd
   - rm -rf ~/.nvm
   - git clone https://github.com/creationix/nvm.git $HOME/.nvm
-  - cd $HOME/.nvm
-  - git checkout `git describe --abbrev=0 --tags`
-  - cd ../
   - . $HOME/.nvm/nvm.sh
   - nvm install $TRAVIS_NODE_VERSION
   - nvm use $TRAVIS_NODE_VERSION
 install:
-  - cd gamification-ui/
+  - cd gamification-ui/ && pwd
   - npm install
-  - cd ../
+  - cd ../ && pwd
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
