@@ -1,21 +1,21 @@
 /**
  * Copyright (c) 2016, juja.com.ua
  * All rights reserved.
- *
+ * <p/>
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- *
+ * <p/>
  * * Redistributions of source code must retain the above copyright notice, this
  * list of conditions and the following disclaimer.
- *
+ * <p/>
  * * Redistributions in binary form must reproduce the above copyright notice,
  * this list of conditions and the following disclaimer in the documentation
  * and/or other materials provided with the distribution.
- *
+ * <p/>
  * * Neither the name of microservices nor the names of its
  * contributors may be used to endorse or promote products derived from
  * this software without specific prior written permission.
- *
+ * <p/>
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -32,6 +32,7 @@
 package juja.microservices.gamification.user;
 
 import java.util.List;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
@@ -40,7 +41,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * @version $Id$
  * @since 1.0
  */
-public interface MongoUserRepo extends MongoRepository<CommonUser, String>, UserRepo {
+public interface MongoUserRepo
+    extends MongoRepository<CommonUser, String>, UserRepo {
 
     /**
      * Create user.
