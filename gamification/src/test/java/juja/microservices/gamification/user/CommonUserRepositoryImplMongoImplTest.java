@@ -28,39 +28,78 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-
 package juja.microservices.gamification.user;
 
-import java.util.List;
-
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.hamcrest.MatcherAssert;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import static org.hamcrest.CoreMatchers.is;
 
 /**
- * User repository interface.
+ * CommonUser repository test.
  * @author Sergii Lisnychyi (ljore@ukr.net)
  * @version $Id$
  * @since 1.0
  */
-public interface MongoUserRepo
-    extends MongoRepository<CommonUser, String>, UserRepo {
+public class CommonUserRepositoryImplMongoImplTest {
 
     /**
-     * Create user.
-     * @param username Username
-     * @return Info about created user
+     * CommonUser repository.
      */
-    String createUser(String username);
+    @InjectMocks
+    private UserRepositoryImpl repository;
 
     /**
-     * Get user by uuid.
-     * @param uuid Uuid
-     * @return User
+     * Mongo templ.
      */
-    User getUser(String uuid);
+    @Mock
+    private MongoTemplate templ;
 
     /**
-     * Get list of all users.
-     * @return List of users
+     * Init mocks.
      */
-    List<User> getUsers();
+    @Before
+    public final void init() {
+        MockitoAnnotations.initMocks(this);
+    }
+
+    /**
+     * Create user test.
+     * @throws Exception if there is an issue.
+     */
+    @Test
+    public final void createUser() throws Exception {
+        final String name = "name";
+        final CommonUser commonUser = new CommonUser(name);
+        final String result = this.repository.createUser(name);
+        MatcherAssert.assertThat(commonUser.getUsername(), is(result));
+    }
+
+    /**
+     * Get user verify.
+     */
+    @Test
+    public final void getUserVerify() {
+        final String uuid = "uuid";
+        final Query query = Query.query(Criteria.where(uuid).is(uuid));
+        this.repository.getUser(uuid);
+        Mockito.verify(this.templ, Mockito.times(1)).findOne(query, CommonUser.class);
+    }
+
+    /**
+     * Get users verify.
+     */
+    @Test
+    public final void getUsersVerify() {
+        this.repository.getUsers();
+        Mockito.verify(this.templ, Mockito.times(1)).findAll(CommonUser.class);
+    }
+
 }

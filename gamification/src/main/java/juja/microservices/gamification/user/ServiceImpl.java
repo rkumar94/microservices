@@ -47,7 +47,7 @@ public class ServiceImpl implements Service {
      * UserRepositoryMongo.
      */
     @Autowired
-    private MongoUserRepo repository;
+    private MongoUserRepository repository;
 
     @Override
     public final String createUser(final String username) {
