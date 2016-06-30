@@ -53,11 +53,11 @@ public interface Service {
      * @param uuid Uuid
      * @return User
      */
-    User getUser(String uuid);
+    CommonUser getUser(String uuid);
 
     /**
      * Get list of all users.
      * @return List of users
      */
-    List<User> getUsers();
+    List<CommonUser> getUsers();
 }

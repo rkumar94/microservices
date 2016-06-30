@@ -117,9 +117,9 @@ public class CommonUserControllerImplTest {
      */
     @Test
     public final void getUsersVerify() {
-        final List<User> users = Collections.singletonList(new CommonUser());
+        final List<CommonUser> users = Collections.singletonList(new CommonUser());
         Mockito.when(this.service.getUsers()).thenReturn(users);
-        final List<User> result = this.controller.getUsers();
+        final List<CommonUser> result = this.controller.getUsers();
         Mockito.verify(this.service, Mockito.times(1)).getUsers();
         Assert.assertEquals(users, result);
     }
