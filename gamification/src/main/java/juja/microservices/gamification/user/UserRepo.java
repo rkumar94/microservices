@@ -39,7 +39,7 @@ import java.util.List;
  * @version $Id$
  * @since 1.0
  */
-public interface UserRepository {
+public interface UserRepo {
 
     /**
      * Create user.
