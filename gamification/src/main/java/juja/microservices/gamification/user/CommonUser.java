@@ -49,7 +49,7 @@ public class CommonUser implements User {
     /**
      * Capacity of String object interpretation.
      */
-    private static final int TOSTRING_CAPACITY = 50;
+    public static final int TOSTRING_CAPACITY = 50;
 
     /**
      * Id field.
@@ -159,7 +159,7 @@ public class CommonUser implements User {
     @Override
     public final String toString() {
         final StringBuilder sbuilider = new StringBuilder(
-            TOSTRING_CAPACITY
+            CommonUser.TOSTRING_CAPACITY
         ).append("CommonUser{id='").append(this.id).append('\'')
             .append(", uuid='").append(this.uuid).append('\'')
             .append(", username='").append(this.username).append('\'')
