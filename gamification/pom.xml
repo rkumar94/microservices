@@ -247,7 +247,6 @@
                             <excludes>
                                 <exclude>checkstyle:/src/main/webapp/.*</exclude>
                                 <exclude>checkstyle:/src/test/.*</exclude>
-                                <exclude>checkstyle:pom.xml</exclude>
                                 <exclude>xml:/src/main/webapp/WEB-INF/application-context.xml</exclude>
                                 <exclude>xml:/src/main/webapp/WEB-INF/web.xml</exclude>
                                 <exclude>duplicatefinder:.*</exclude>
