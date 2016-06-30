@@ -32,16 +32,14 @@
 package juja.microservices.gamification.user;
 
 import java.util.List;
-import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
- * User repository interface.
+ * User custom repository interface.
  * @author Sergii Lisnychyi (ljore@ukr.net)
  * @version $Id$
  * @since 1.0
  */
-public interface MongoUserRepository
-    extends MongoRepository<CommonUser, String>, UserRepository {
+public interface UserRepositoryCustom {
 
     /**
      * Create user.
@@ -51,15 +49,15 @@ public interface MongoUserRepository
     String createUser(String username);
 
     /**
-     * Get user by uuid.
+     * Get user by Uuid.
      * @param uuid Uuid
      * @return User
      */
-    User getUser(String uuid);
+    CommonUser getUser(String uuid);
 
     /**
      * Get list of all users.
      * @return List of users
      */
-    List<User> getUsers();
+    List<CommonUser> getUsers();
 }

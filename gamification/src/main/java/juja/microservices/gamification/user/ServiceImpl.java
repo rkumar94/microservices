@@ -44,10 +44,10 @@ import org.springframework.stereotype.Component;
 public class ServiceImpl implements Service {
 
     /**
-     * UserRepositoryMongo.
+     * UserRepositoryCu.
      */
     @Autowired
-    private MongoUserRepository repository;
+    private UserRepository repository;
 
     @Override
     public final String createUser(final String username) {
@@ -55,12 +55,12 @@ public class ServiceImpl implements Service {
     }
 
     @Override
-    public final User getUser(final String uuid) {
+    public final CommonUser getUser(final String uuid) {
         return this.repository.getUser(uuid);
     }
 
     @Override
-    public final List<User> getUsers() {
+    public final List<CommonUser> getUsers() {
         return this.repository.getUsers();
     }
 

@@ -87,7 +87,7 @@ public class UserControllerImpl {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/find/{UUID}")
     public final Response getUser(@PathParam("UUID") final String uuid) {
-        final User user = this.service.getUser(uuid);
+        final CommonUser user = this.service.getUser(uuid);
         final Response result;
         if (user == null) {
             result = Response.status(Response.Status.BAD_REQUEST)
@@ -106,7 +106,7 @@ public class UserControllerImpl {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/list")
-    public final List<User> getUsers() {
+    public final List<CommonUser> getUsers() {
         return this.service.getUsers();
     }
 

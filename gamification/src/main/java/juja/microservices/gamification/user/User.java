@@ -39,11 +39,6 @@ package juja.microservices.gamification.user;
 public interface User {
 
     /**
-     * Capacity of String object interpretation.
-     */
-    int TOSTRING_CAPACITY = 50;
-
-    /**
      * Get username.
      * @return Username
      */

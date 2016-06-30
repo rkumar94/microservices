@@ -45,7 +45,7 @@ import org.springframework.stereotype.Repository;
  * @since 1.0
  */
 @Repository
-public class UserRepositoryImpl implements UserRepository {
+public class UserRepositoryImpl implements UserRepositoryCustom {
 
     /**
      * MongoTemplate.
@@ -55,19 +55,19 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public final String createUser(final String username) {
-        final User user = new CommonUser(username);
+        final CommonUser user = new CommonUser(username);
         this.template.save(user);
         return user.getUsername();
     }
 
     @Override
-    public final User getUser(final String uuid) {
+    public final CommonUser getUser(final String uuid) {
         final Query query = Query.query(Criteria.where("uuid").is(uuid));
         return this.template.findOne(query, CommonUser.class);
     }
 
     @Override
-    public final List<User> getUsers() {
-        return this.template.findAll(User.class);
+    public final List<CommonUser> getUsers() {
+        return this.template.findAll(CommonUser.class);
     }
 }

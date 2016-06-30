@@ -47,14 +47,21 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class CommonUser implements User {
 
     /**
+     * Capacity of String object interpretation.
+     */
+    private static final int TOSTRING_CAPACITY = 50;
+
+    /**
      * Id field.
      */
     @Id
     private String id;
+
     /**
      * Uuid field.
      */
     private String uuid;
+
     /**
      * Username field.
      */
@@ -152,7 +159,7 @@ public class CommonUser implements User {
     @Override
     public final String toString() {
         final StringBuilder sbuilider = new StringBuilder(
-            CommonUser.TOSTRING_CAPACITY
+            TOSTRING_CAPACITY
         ).append("CommonUser{id='").append(this.id).append('\'')
             .append(", uuid='").append(this.uuid).append('\'')
             .append(", username='").append(this.username).append('\'')
