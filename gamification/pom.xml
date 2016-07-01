@@ -222,7 +222,7 @@
                                 <exclude>xml:/src/main/webapp/WEB-INF/web.xml</exclude>
                                 <exclude>duplicatefinder:.*</exclude>
                                 <exclude>dependencies:org.eclipse.jetty:jetty-server:jar:.*</exclude>
-                                <exclude>dependencies:org.springframework:spring-web:jar:.*</exclude>
+                                <exclude>findbugs:org.springframework:spring-web:jar:.*</exclude>
                                 <exclude>dependencies:com.fasterxml.jackson.core:jackson-databind:jar:.*:.*</exclude>
                                 <exclude>dependencies:com.fasterxml.jackson.core:jackson-core:jar:.*:.*</exclude>
                                 <exclude>dependencies:org.eclipse.jetty:jetty-client:jar:.*:.*</exclude>
