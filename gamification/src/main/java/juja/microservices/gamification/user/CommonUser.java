@@ -31,7 +31,6 @@
 package juja.microservices.gamification.user;
 
 import java.util.Objects;
-import java.util.UUID;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
@@ -77,7 +76,6 @@ public class CommonUser implements User {
     public CommonUser(final String username) {
         this.username = username;
     }
-
 
     @Override
     public final String getUsername() {
