@@ -222,15 +222,15 @@
                                 <exclude>xml:/src/main/webapp/WEB-INF/web.xml</exclude>
                                 <exclude>duplicatefinder:.*</exclude>
                                 <exclude>dependencies:org.eclipse.jetty:jetty-server:jar:.*</exclude>
-                                <exclude>org.springframework:spring-web:jar:.*:.*</exclude>
-                                <exclude>com.fasterxml.jackson.core:jackson-databind:jar:.*:.*</exclude>
-                                <exclude>com.fasterxml.jackson.core:jackson-core:jar:.*:.*</exclude>
-                                <exclude>org.eclipse.jetty:jetty-client:jar:.*:.*</exclude>
-                                <exclude>org.eclipse.jetty:jetty-server:jar:.*:.*</exclude>
-                                <exclude>org.eclipse.jetty:jetty-webapp:jar:.*:.*</exclude>
-                                <exclude>org.slf4j:slf4j-log4j12:jar:.*:.*</exclude>
-                                <exclude>com.sun.jersey:jersey-server:jar:.*:.*</exclude>
-                                <exclude>com.sun.jersey.contribs:jersey-spring:jar:.*:.*</exclude>
+                                <exclude>dependencies:org.springframework:spring-web:jar:.*:.*</exclude>
+                                <exclude>dependencies:com.fasterxml.jackson.core:jackson-databind:jar:.*:.*</exclude>
+                                <exclude>dependencies:com.fasterxml.jackson.core:jackson-core:jar:.*:.*</exclude>
+                                <exclude>dependencies:org.eclipse.jetty:jetty-client:jar:.*:.*</exclude>
+                                <exclude>dependencies:org.eclipse.jetty:jetty-server:jar:.*:.*</exclude>
+                                <exclude>dependencies:org.eclipse.jetty:jetty-webapp:jar:.*:.*</exclude>
+                                <exclude>dependencies:org.slf4j:slf4j-log4j12:jar:.*:.*</exclude>
+                                <exclude>dependencies:com.sun.jersey:jersey-server:jar:.*:.*</exclude>
+                                <exclude>dependencies:com.sun.jersey.contribs:jersey-spring:jar:.*:.*</exclude>
                             </excludes>
                         </configuration>
                         <executions>
