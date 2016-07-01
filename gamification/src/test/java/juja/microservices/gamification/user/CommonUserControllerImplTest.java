@@ -53,13 +53,13 @@ public class CommonUserControllerImplTest {
      * CommonUser controller.
      */
     @InjectMocks
-    private transient UserControllerImpl controller;
+    private transient UserController controller;
 
     /**
      * CommonUser service.
      */
     @Mock
-    private transient Service service;
+    private transient UserService service;
 
     /**
      * Init mocks.
@@ -90,11 +90,11 @@ public class CommonUserControllerImplTest {
      */
     @Test
     public final void getUserWithCorrectUuid() throws Exception {
-        final String uuid = "12345";
-        final CommonUser commonUser = new CommonUser();
-        commonUser.setId(uuid);
-        Mockito.when(this.service.getUser(uuid)).thenReturn(commonUser);
-        final Response resp = this.controller.getUser(uuid);
+        final String id = "12345";
+        final CommonUser commonUser = new CommonUser(id);
+        commonUser.setId(id);
+        Mockito.when(this.service.getUser(id)).thenReturn(commonUser);
+        final Response resp = this.controller.getUser(id);
         final Response expected = Response.ok(commonUser).build();
         Assert.assertEquals(expected.getStatus(), resp.getStatus());
         Assert.assertEquals(expected.getEntity(), resp.getEntity());
@@ -117,7 +117,7 @@ public class CommonUserControllerImplTest {
      */
     @Test
     public final void getUsersVerify() {
-        final List<CommonUser> users = Collections.singletonList(new CommonUser());
+        final List<CommonUser> users = Collections.singletonList(new CommonUser(null));
         Mockito.when(this.service.getUsers()).thenReturn(users);
         final List<CommonUser> result = this.controller.getUsers();
         Mockito.verify(this.service, Mockito.times(1)).getUsers();

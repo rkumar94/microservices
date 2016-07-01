@@ -41,10 +41,10 @@ import org.springframework.stereotype.Component;
  * @since 1.0
  */
 @Component
-public class ServiceImpl implements Service {
+public class CommonUserService implements UserService {
 
     /**
-     * UserRepositoryCu.
+     * UserRepository.
      */
     @Autowired
     private UserRepository repository;

@@ -62,13 +62,6 @@ public class CommonUser implements User {
     private String username;
 
     /**
-     * CommonUser constructor by default.
-     */
-    public CommonUser() {
-        super();
-    }
-
-    /**
      * CommonUser persistence constructor.
      * @param username Username
      */
@@ -111,14 +104,14 @@ public class CommonUser implements User {
         boolean result = false;
         if (this == obj) {
             result = true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
+        } else if (obj == null || getClass() != obj.getClass()) {
             result = false;
+        } else {
+            final CommonUser user = (CommonUser) obj;
+            result = Objects.equals(this.id, user.id)
+                    && Objects.equals(this.username, user.username);
         }
-        final CommonUser user = (CommonUser) obj;
-        assert user != null;
-        return result || Objects.equals(this.id, user.id)
-            && Objects.equals(this.username, user.username);
+            return result;
     }
 
     @Override

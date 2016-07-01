@@ -28,36 +28,86 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-
 package juja.microservices.gamification.user;
 
 import java.util.List;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
- * User service interface.
+ * Rest requests to operate with users.
+ *
  * @author Sergii Lisnychyi (ljore@ukr.net)
  * @version $Id$
  * @since 1.0
  */
-public interface Service {
+@Component
+@Path("/user")
+public class UserController {
+
+    /**
+     * Service.
+     */
+    @Autowired
+    private transient UserService service;
 
     /**
      * Create user.
-     * @param username Username
-     * @return Info about created user
+     * @param name Username
+     * @return Information about created user
      */
-    String createUser(String username);
+    @GET
+    @Path("/create/{username}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public final Response createUser(@PathParam("username") final String name) {
+        final String user = this.service.createUser(name);
+        final Response result;
+        if (user == null) {
+            result = Response.status(Response.Status.BAD_REQUEST)
+                .entity("can't create user.").build();
+        } else {
+            final String message = String.format("created with name=%s", user);
+            result = Response.ok(message).build();
+        }
+        return result;
+    }
 
     /**
      * Get user by uuid.
      * @param uuid Uuid
      * @return User
      */
-    CommonUser getUser(String uuid);
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/find/{UUID}")
+    public final Response getUser(@PathParam("UUID") final String uuid) {
+        final CommonUser user = this.service.getUser(uuid);
+        final Response result;
+        if (user == null) {
+            result = Response.status(Response.Status.BAD_REQUEST)
+                .entity(String.format("no user with %s uuid", uuid)).build();
+        } else {
+            result = Response.ok(user).build();
+        }
+        return result;
+    }
 
     /**
      * Get list of all users.
+     *
      * @return List of users
      */
-    List<CommonUser> getUsers();
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/list")
+    public final List<CommonUser> getUsers() {
+        return this.service.getUsers();
+    }
+
 }
