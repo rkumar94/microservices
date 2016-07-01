@@ -8,3 +8,9 @@ local-repo/
 .project
 */.gradle/
 */build/
+/*gui artifacts*/
+*.log
+node_modules/
+tmp
+.DS_Store
+bower_components/
