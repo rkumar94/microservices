@@ -81,6 +81,9 @@ public class GdataSpreadSheetReader implements SpreadSheetReader {
     public CellEntry createNewHeader(String header) throws IOException, ServiceException {
         int gDataRowNum = HEADER_ROW_NUM + 1;
         int maxColumnNumber = getColumnNumber(HEADER_ROW_NUM);
+        WorksheetEntry worksheet = getDefaultWorkSheetEntry(gdataService);
+        worksheet.setColCount(worksheet.getColCount()+1);
+        worksheet.update();
         CellFeed cellFeed = getCellFeed();
         CellEntry newColumn = new CellEntry(gDataRowNum, maxColumnNumber + 1, header);
         return cellFeed.insert(newColumn);
