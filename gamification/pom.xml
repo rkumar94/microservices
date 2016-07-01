@@ -221,16 +221,7 @@
                                 <exclude>xml:/src/main/webapp/WEB-INF/application-context.xml</exclude>
                                 <exclude>xml:/src/main/webapp/WEB-INF/web.xml</exclude>
                                 <exclude>duplicatefinder:.*</exclude>
-                                <exclude>dependencies:org.eclipse.jetty:jetty-server:jar:.*</exclude>
-                                <exclude>findbugs:org.springframework:spring-web:jar:.*</exclude>
-                                <exclude>dependencies:com.fasterxml.jackson.core:jackson-databind:jar:.*:.*</exclude>
-                                <exclude>dependencies:com.fasterxml.jackson.core:jackson-core:jar:.*:.*</exclude>
-                                <exclude>dependencies:org.eclipse.jetty:jetty-client:jar:.*:.*</exclude>
-                                <exclude>dependencies:org.eclipse.jetty:jetty-server:jar:.*:.*</exclude>
-                                <exclude>dependencies:org.eclipse.jetty:jetty-webapp:jar:.*:.*</exclude>
-                                <exclude>dependencies:org.slf4j:slf4j-log4j12:jar:.*:.*</exclude>
-                                <exclude>dependencies:com.sun.jersey:jersey-server:jar:.*:.*</exclude>
-                                <exclude>dependencies:com.sun.jersey.contribs:jersey-spring:jar:.*:.*</exclude>
+                                <exclude>dependencies:.*</exclude>
                             </excludes>
                         </configuration>
                         <executions>
