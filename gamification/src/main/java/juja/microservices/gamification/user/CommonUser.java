@@ -58,11 +58,6 @@ public class CommonUser implements User {
     private String id;
 
     /**
-     * Uuid field.
-     */
-    private String uuid;
-
-    /**
      * Username field.
      */
     private String username;
@@ -81,24 +76,8 @@ public class CommonUser implements User {
     @PersistenceConstructor
     public CommonUser(final String username) {
         this.username = username;
-        this.uuid = UUID.randomUUID().toString();
     }
 
-    /**
-     * Get uuid.
-     * @return Uuid
-     */
-    public final String getUuid() {
-        return this.uuid;
-    }
-
-    /**
-     * Set uuid.
-     * @param inuuid Uuid
-     */
-    public final void setUuid(final String inuuid) {
-        this.uuid = inuuid;
-    }
 
     @Override
     public final String getUsername() {
@@ -141,7 +120,6 @@ public class CommonUser implements User {
         final CommonUser user = (CommonUser) obj;
         assert user != null;
         return result || Objects.equals(this.id, user.id)
-            && Objects.equals(this.uuid, user.uuid)
             && Objects.equals(this.username, user.username);
     }
 
@@ -151,7 +129,6 @@ public class CommonUser implements User {
         final int secprime = 37;
         return new HashCodeBuilder(prime, secprime)
             .append(this.id)
-            .append(this.uuid)
             .append(this.username)
             .toHashCode();
     }
@@ -161,7 +138,6 @@ public class CommonUser implements User {
         final StringBuilder sbuilider = new StringBuilder(
             CommonUser.TOSTRING_CAPACITY
         ).append("CommonUser{id='").append(this.id).append('\'')
-            .append(", uuid='").append(this.uuid).append('\'')
             .append(", username='").append(this.username).append('\'')
             .append('}');
         return sbuilider.toString();

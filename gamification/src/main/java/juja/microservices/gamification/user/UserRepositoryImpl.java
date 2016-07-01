@@ -61,8 +61,8 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
     }
 
     @Override
-    public final CommonUser getUser(final String uuid) {
-        final Query query = Query.query(Criteria.where("uuid").is(uuid));
+    public final CommonUser getUser(final String id) {
+        final Query query = Query.query(Criteria.where("_id").is(id));
         return this.template.findOne(query, CommonUser.class);
     }
 

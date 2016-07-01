@@ -92,7 +92,7 @@ public class CommonUserControllerImplTest {
     public final void getUserWithCorrectUuid() throws Exception {
         final String uuid = "12345";
         final CommonUser commonUser = new CommonUser();
-        commonUser.setUuid(uuid);
+        commonUser.setId(uuid);
         Mockito.when(this.service.getUser(uuid)).thenReturn(commonUser);
         final Response resp = this.controller.getUser(uuid);
         final Response expected = Response.ok(commonUser).build();
