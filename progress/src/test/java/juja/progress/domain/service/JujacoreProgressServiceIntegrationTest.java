@@ -7,6 +7,8 @@ import com.google.inject.Injector;
 import com.google.inject.Key;
 import com.google.inject.name.Names;
 import java.util.Set;
+
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import juja.google.spreadsheet.api.Cell;
 import juja.google.spreadsheet.api.SpreadSheetReader;
 import juja.google.spreadsheet.api.gdata.GdataCell;
@@ -68,6 +70,7 @@ public class JujacoreProgressServiceIntegrationTest {
         MatcherAssert.assertThat(cell.value(), Is.is("DONE"));
     }
 
+    @Ignore
     @Test
     public void createsNewColumnForUserId() throws Exception {
         final SpreadSheetReader spreadsheet =
