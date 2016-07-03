@@ -1,0 +1,5 @@
+architect:
+- vkuchyn
+merge:
+  script: |-
+    mvn clean install -Pqulice --errors
