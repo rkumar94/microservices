@@ -32,7 +32,7 @@
 package juja.microservices.gamification.user;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.inject.Inject;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -45,13 +45,21 @@ import org.springframework.stereotype.Repository;
  * @since 1.0
  */
 @Repository
-public class UserRepositoryImpl implements UserRepositoryCustom {
+public class UserRepositoryImpl implements UserRepository {
 
     /**
      * MongoTemplate.
      */
-    @Autowired
-    private transient MongoTemplate template;
+    private final transient MongoTemplate template;
+
+    /**
+     * Constructor.
+     * @param template MongoTemplate
+     */
+    @Inject
+    public UserRepositoryImpl(final MongoTemplate template) {
+        this.template = template;
+    }
 
     @Override
     public final String createUser(final String username) {

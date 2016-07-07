@@ -52,7 +52,7 @@ import org.springframework.stereotype.Component;
 public class UserController {
 
     /**
-     * Service.
+     * UserController.
      */
     @Autowired
     private transient UserService service;

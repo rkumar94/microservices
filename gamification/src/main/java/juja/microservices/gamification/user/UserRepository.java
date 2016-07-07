@@ -32,7 +32,6 @@
 package juja.microservices.gamification.user;
 
 import java.util.List;
-import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
  * User repository interface.
@@ -40,8 +39,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * @version $Id$
  * @since 1.0
  */
-public interface UserRepository
-    extends MongoRepository<CommonUser, String>, UserRepositoryCustom {
+public interface UserRepository {
 
     /**
      * Create user.

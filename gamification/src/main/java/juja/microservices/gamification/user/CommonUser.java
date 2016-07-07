@@ -109,9 +109,9 @@ public class CommonUser implements User {
         } else {
             final CommonUser user = (CommonUser) obj;
             result = Objects.equals(this.id, user.id)
-                    && Objects.equals(this.username, user.username);
+                && Objects.equals(this.username, user.username);
         }
-            return result;
+        return result;
     }
 
     @Override

@@ -87,7 +87,7 @@ public class CommonUserRepositoryImplMongoImplTest {
      */
     @Test
     public final void getUserVerify() {
-        final String uuid = "uuid";
+        final String uuid = "_id";
         final Query query = Query.query(Criteria.where(uuid).is(uuid));
         this.repository.getUser(uuid);
         Mockito.verify(this.templ, Mockito.times(1)).findOne(query, CommonUser.class);
