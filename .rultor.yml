@@ -1,5 +1,16 @@
+docker:
+  as_root: true
+  image: juja/rultor-juja-microservices
+install:
+    - cd simple-slack-api/
+    - gradle clean install
+    - cd ../
+    - cd gamification-ui/
+    - npm install
+    - cd ../
 architect:
-- vkuchyn
+    - vkuchyn
 merge:
-  script: |-
-    mvn clean install -Pqulice --errors
+  script:
+    - mvn clean install -Pqulice --errors
+    - gamification-ui/node_modules/.bin/karma start gamification-ui/karma.conf.js --no-auto-watch --single-run --reporters=dots --browsers=Firefox
