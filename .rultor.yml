@@ -1,6 +1,6 @@
 docker:
-    - as_root: true
-    - image: juja/rultor-juja-microservices
+    as_root: true
+    image: juja/rultor-juja-microservices
 install:
     - cd simple-slack-api/
     - gradle clean install
