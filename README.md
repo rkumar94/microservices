@@ -15,3 +15,5 @@ and maven full build:
 ```
 $ mvn clean install -Pqulince
 ```
+[travis-ci.org](http://www.travis-ci.org)<br/>
+[![Build Status](https://travis-ci.org/JuniorsJava/microservices.svg?branch=master)](https://travis-ci.org/JuniorsJava/microservices)
