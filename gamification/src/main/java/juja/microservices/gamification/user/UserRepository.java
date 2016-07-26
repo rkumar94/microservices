@@ -29,11 +29,9 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-package juja.microservices.gamification.model.repository;
+package juja.microservices.gamification.user;
 
 import java.util.List;
-import juja.microservices.gamification.model.entity.User;
-import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
  * User repository interface.
@@ -41,8 +39,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * @version $Id$
  * @since 1.0
  */
-public interface UserRepository
-    extends MongoRepository<User, String>, UserRepositoryCustom {
+public interface UserRepository {
 
     /**
      * Create user.
@@ -56,11 +53,11 @@ public interface UserRepository
      * @param uuid Uuid
      * @return User
      */
-    User getUser(String uuid);
+    CommonUser getUser(String uuid);
 
     /**
      * Get list of all users.
      * @return List of users
      */
-    List<User> getUsers();
+    List<CommonUser> getUsers();
 }

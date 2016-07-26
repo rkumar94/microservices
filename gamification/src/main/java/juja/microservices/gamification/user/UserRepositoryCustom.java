@@ -28,42 +28,36 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package juja.microservices.gamification.service;
+
+package juja.microservices.gamification.user;
 
 import java.util.List;
-import juja.microservices.gamification.model.entity.User;
-import juja.microservices.gamification.model.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
- * Serving user actions.
+ * User custom repository interface.
  * @author Sergii Lisnychyi (ljore@ukr.net)
  * @version $Id$
  * @since 1.0
  */
-@Component
-public class ServiceImpl implements Service {
+public interface UserRepositoryCustom {
 
     /**
-     * UserRepository.
+     * Create user.
+     * @param username Username
+     * @return Info about created user
      */
-    @Autowired
-    private UserRepository repository;
+    String createUser(String username);
 
-    @Override
-    public final String createUser(final String username) {
-        return this.repository.createUser(username);
-    }
+    /**
+     * Get user by Uuid.
+     * @param uuid Uuid
+     * @return User
+     */
+    CommonUser getUser(String uuid);
 
-    @Override
-    public final User getUser(final String uuid) {
-        return this.repository.getUser(uuid);
-    }
-
-    @Override
-    public final List<User> getUsers() {
-        return this.repository.getUsers();
-    }
-
+    /**
+     * Get list of all users.
+     * @return List of users
+     */
+    List<CommonUser> getUsers();
 }

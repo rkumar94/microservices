@@ -29,10 +29,35 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+package juja.microservices.gamification.user;
+
+import java.util.List;
+
 /**
- * Gamification starter class.
- * @author Viktor Kuchyn (kuchin.victor@gmail.com)
+ * User service interface.
+ * @author Sergii Lisnychyi (ljore@ukr.net)
  * @version $Id$
  * @since 1.0
  */
-package juja.microservices.gamification.jersey;
+public interface UserService {
+
+    /**
+     * Create user.
+     * @param username Username
+     * @return Info about created user
+     */
+    String createUser(String username);
+
+    /**
+     * Get user by id.
+     * @param id Id
+     * @return User
+     */
+    CommonUser getUser(String id);
+
+    /**
+     * Get list of all users.
+     * @return List of users
+     */
+    List<CommonUser> getUsers();
+}

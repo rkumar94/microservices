@@ -30,9 +30,9 @@
  */
 
 /**
- * Gamification starter class.
+ * Test class for user functionality.
  * @author Viktor Kuchyn (kuchin.victor@gmail.com)
  * @version $Id$
  * @since 1.0
  */
-package juja.microservices.gamification.model.repository;
+package juja.microservices.gamification.user;

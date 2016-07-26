@@ -7,6 +7,7 @@ import com.google.inject.Injector;
 import com.google.inject.Key;
 import com.google.inject.name.Names;
 import java.util.Set;
+
 import juja.google.spreadsheet.api.Cell;
 import juja.google.spreadsheet.api.SpreadSheetReader;
 import juja.google.spreadsheet.api.gdata.GdataCell;
@@ -21,6 +22,7 @@ import org.hamcrest.core.IsCollectionContaining;
 import org.hamcrest.core.IsNot;
 import org.junit.After;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class JujacoreProgressServiceIntegrationTest {
@@ -68,6 +70,7 @@ public class JujacoreProgressServiceIntegrationTest {
         MatcherAssert.assertThat(cell.value(), Is.is("DONE"));
     }
 
+    @Ignore
     @Test
     public void createsNewColumnForUserId() throws Exception {
         final SpreadSheetReader spreadsheet =

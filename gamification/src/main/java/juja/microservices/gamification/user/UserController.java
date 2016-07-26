@@ -28,7 +28,7 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package juja.microservices.gamification.jersey;
+package juja.microservices.gamification.user;
 
 import java.util.List;
 import javax.ws.rs.GET;
@@ -37,8 +37,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import juja.microservices.gamification.model.entity.User;
-import juja.microservices.gamification.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -51,13 +49,13 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Path("/user")
-public class UserControllerImpl {
+public class UserController {
 
     /**
-     * Service.
+     * UserController.
      */
     @Autowired
-    private transient Service service;
+    private transient UserService service;
 
     /**
      * Create user.
@@ -89,7 +87,7 @@ public class UserControllerImpl {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/find/{UUID}")
     public final Response getUser(@PathParam("UUID") final String uuid) {
-        final User user = this.service.getUser(uuid);
+        final CommonUser user = this.service.getUser(uuid);
         final Response result;
         if (user == null) {
             result = Response.status(Response.Status.BAD_REQUEST)
@@ -108,7 +106,7 @@ public class UserControllerImpl {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/list")
-    public final List<User> getUsers() {
+    public final List<CommonUser> getUsers() {
         return this.service.getUsers();
     }
 

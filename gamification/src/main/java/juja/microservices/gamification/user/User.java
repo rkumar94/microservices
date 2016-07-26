@@ -28,37 +28,20 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-
-package juja.microservices.gamification.model.repository;
-
-import java.util.List;
-import juja.microservices.gamification.model.entity.User;
+package juja.microservices.gamification.user;
 
 /**
- * User custom repository interface.
+ * User interface.
  * @author Sergii Lisnychyi (ljore@ukr.net)
  * @version $Id$
  * @since 1.0
  */
-public interface UserRepositoryCustom {
+public interface User {
 
     /**
-     * Create user.
-     * @param username Username
-     * @return Info about created user
+     * Get username.
+     * @return Username
      */
-    String createUser(String username);
+    String getUsername();
 
-    /**
-     * Get user by Uuid.
-     * @param uuid Uuid
-     * @return User
-     */
-    User getUser(String uuid);
-
-    /**
-     * Get list of all users.
-     * @return List of users
-     */
-    List<User> getUsers();
 }

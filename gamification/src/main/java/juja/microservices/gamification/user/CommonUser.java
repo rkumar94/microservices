@@ -28,10 +28,9 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package juja.microservices.gamification.model.entity;
+package juja.microservices.gamification.user;
 
 import java.util.Objects;
-import java.util.UUID;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
@@ -44,63 +43,34 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @since 1.0
  */
 @Document(collection = "users")
-public class User {
+public class CommonUser implements User {
 
     /**
      * Capacity of String object interpretation.
      */
     public static final int TOSTRING_CAPACITY = 50;
+
     /**
      * Id field.
      */
     @Id
     private String id;
-    /**
-     * Uuid field.
-     */
-    private String uuid;
+
     /**
      * Username field.
      */
     private String username;
 
     /**
-     * User constructor by default.
-     */
-    public User() {
-        super();
-    }
-
-    /**
-     * User persistence constructor.
+     * CommonUser persistence constructor.
      * @param username Username
      */
     @PersistenceConstructor
-    public User(final String username) {
+    public CommonUser(final String username) {
         this.username = username;
-        this.uuid = UUID.randomUUID().toString();
     }
 
-    /**
-     * Get uuid.
-     * @return Uuid
-     */
-    public final String getUuid() {
-        return this.uuid;
-    }
-
-    /**
-     * Set uuid.
-     * @param inuuid Uuid
-     */
-    public final void setUuid(final String inuuid) {
-        this.uuid = inuuid;
-    }
-
-    /**
-     * Get username.
-     * @return Username
-     */
+    @Override
     public final String getUsername() {
         return this.username;
     }
@@ -134,15 +104,14 @@ public class User {
         boolean result = false;
         if (this == obj) {
             result = true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
+        } else if (obj == null || getClass() != obj.getClass()) {
             result = false;
+        } else {
+            final CommonUser user = (CommonUser) obj;
+            result = Objects.equals(this.id, user.id)
+                && Objects.equals(this.username, user.username);
         }
-        final User user = (User) obj;
-        assert user != null;
-        return result || Objects.equals(this.id, user.id)
-            && Objects.equals(this.uuid, user.uuid)
-            && Objects.equals(this.username, user.username);
+        return result;
     }
 
     @Override
@@ -151,7 +120,6 @@ public class User {
         final int secprime = 37;
         return new HashCodeBuilder(prime, secprime)
             .append(this.id)
-            .append(this.uuid)
             .append(this.username)
             .toHashCode();
     }
@@ -159,9 +127,8 @@ public class User {
     @Override
     public final String toString() {
         final StringBuilder sbuilider = new StringBuilder(
-            User.TOSTRING_CAPACITY
-        ).append("User{id='").append(this.id).append('\'')
-            .append(", uuid='").append(this.uuid).append('\'')
+            CommonUser.TOSTRING_CAPACITY
+        ).append("CommonUser{id='").append(this.id).append('\'')
             .append(", username='").append(this.username).append('\'')
             .append('}');
         return sbuilider.toString();
