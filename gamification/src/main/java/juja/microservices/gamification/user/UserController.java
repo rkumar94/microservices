@@ -59,6 +59,7 @@ public class UserController {
 
     /**
      * Create user.
+     *
      * @param name Username
      * @return Information about created user
      */
@@ -80,6 +81,7 @@ public class UserController {
 
     /**
      * Get user by uuid.
+     *
      * @param uuid Uuid
      * @return User
      */
@@ -87,7 +89,7 @@ public class UserController {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/find/{UUID}")
     public final Response getUser(@PathParam("UUID") final String uuid) {
-        final CommonUser user = this.service.getUser(uuid);
+        final User user = this.service.getUser(uuid);
         final Response result;
         if (user == null) {
             result = Response.status(Response.Status.BAD_REQUEST)
@@ -106,7 +108,7 @@ public class UserController {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/list")
-    public final List<CommonUser> getUsers() {
+    public final List<User> getUsers() {
         return this.service.getUsers();
     }
 

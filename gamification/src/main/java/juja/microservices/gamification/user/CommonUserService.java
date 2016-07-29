@@ -31,11 +31,12 @@
 package juja.microservices.gamification.user;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.inject.Inject;
 import org.springframework.stereotype.Component;
 
 /**
  * Serving user actions.
+ *
  * @author Sergii Lisnychyi (ljore@ukr.net)
  * @version $Id$
  * @since 1.0
@@ -46,8 +47,16 @@ public class CommonUserService implements UserService {
     /**
      * UserRepository.
      */
-    @Autowired
-    private UserRepository repository;
+    private final UserRepository repository;
+
+    /**
+     * CommonUserService constructor.
+     * @param repository User repository
+     */
+    @Inject
+    public CommonUserService(final UserRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public final String createUser(final String username) {
@@ -55,12 +64,12 @@ public class CommonUserService implements UserService {
     }
 
     @Override
-    public final CommonUser getUser(final String uuid) {
+    public final User getUser(final String uuid) {
         return this.repository.getUser(uuid);
     }
 
     @Override
-    public final List<CommonUser> getUsers() {
+    public final List<User> getUsers() {
         return this.repository.getUsers();
     }
 

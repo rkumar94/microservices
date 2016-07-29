@@ -53,11 +53,11 @@ public interface UserRepository {
      * @param uuid Uuid
      * @return User
      */
-    CommonUser getUser(String uuid);
+    User getUser(String uuid);
 
     /**
      * Get list of all users.
      * @return List of users
      */
-    List<CommonUser> getUsers();
+    List<User> getUsers();
 }
