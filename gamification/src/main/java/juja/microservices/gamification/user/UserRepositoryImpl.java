@@ -31,6 +31,7 @@
 
 package juja.microservices.gamification.user;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -40,6 +41,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * User custom repository implementation.
+ *
  * @author Sergii Lisnychyi (ljore@ukr.net)
  * @version $Id$
  * @since 1.0
@@ -54,6 +56,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     /**
      * Constructor.
+     *
      * @param template MongoTemplate
      */
     @Inject
@@ -69,13 +72,16 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public final CommonUser getUser(final String id) {
+    public final User getUser(final String id) {
         final Query query = Query.query(Criteria.where("_id").is(id));
         return this.template.findOne(query, CommonUser.class);
     }
 
     @Override
-    public final List<CommonUser> getUsers() {
-        return this.template.findAll(CommonUser.class);
+    public final List<User> getUsers() {
+        final List<CommonUser>  users = this.template.findAll(CommonUser.class);
+        final List<User> result = new ArrayList<>(users.size());
+        result.addAll(users);
+        return result;
     }
 }

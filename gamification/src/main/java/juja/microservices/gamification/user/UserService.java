@@ -53,11 +53,11 @@ public interface UserService {
      * @param id Id
      * @return User
      */
-    CommonUser getUser(String id);
+    User getUser(String id);
 
     /**
      * Get list of all users.
      * @return List of users
      */
-    List<CommonUser> getUsers();
+    List<User> getUsers();
 }
