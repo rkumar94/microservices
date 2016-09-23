@@ -10,7 +10,6 @@
     <name>microservices</name>
     <modules>
         <module>progress</module>
-        <module>gamification</module>
     </modules>
 
     <properties>

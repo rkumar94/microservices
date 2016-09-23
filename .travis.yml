@@ -27,5 +27,6 @@ before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
 script:
-  - mvn clean install -Pqulice
+  - mvn clean install
+  - gradle clean install gamification/build.gradle
   - gamification-ui/node_modules/.bin/karma start gamification-ui/karma.conf.js --no-auto-watch --single-run --reporters=dots --browsers=Firefox
