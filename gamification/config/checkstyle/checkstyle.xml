@@ -39,9 +39,7 @@ page at http://checkstyle.sourceforge.net/config.html -->
         <!-- Checks that each Java package has a Javadoc file used for commenting.
           Only allows a package-info.java, not package.html. -->
     </module>
-    <!--<module name="SuppressionFilter">
-        <property name="file" value="${baseDir}/config/checkstyle/mysuppression.xml" />
-    </module>-->
+
      <!--All Java AST specific tests live under TreeWalker module.-->
     <module name="RegexpMultiline">
         <property name="format" value="\r?\n[ \t\x0B\f]*\r?\n[ \t\x0B\f]*\r?\n"/>

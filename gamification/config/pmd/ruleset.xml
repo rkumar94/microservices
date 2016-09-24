@@ -8,8 +8,6 @@
     <description>Kennisgroep default Rules</description>
 
     <rule ref="rulesets/java/strings.xml"/>
-    <!--<rule ref="rulesets/basic-jsp.xml"/>-->
-    <!--<rule ref="rulesets/basic-jsf.xml"/>-->
     <rule ref="rulesets/java/braces.xml"/>
     <rule ref="rulesets/java/clone.xml"/>
     <rule ref="rulesets/java/codesize.xml"/>
