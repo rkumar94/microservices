@@ -97,7 +97,11 @@ public class SimpleComment implements Comment {
      * @param newtime Time.
      */
     public final void setTime(final Date newtime) {
-        this.time = newtime;
+        Date result = null;
+        if (newtime != null) {
+            result = new Date(newtime.getTime());
+        }
+        this.time = result;
     }
 
     /**
