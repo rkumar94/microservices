@@ -17,3 +17,6 @@ $ mvn clean install -Pqulice
 ```
 [travis-ci.org](http://www.travis-ci.org)<br/>
 [![Build Status](https://travis-ci.org/JuniorsJava/microservices.svg?branch=master)](https://travis-ci.org/JuniorsJava/microservices)
+
+# User storie description
+You can find functional requirements in user stories (US) format by the [reference](https://docs.google.com/spreadsheets/d/1WaUEXPRBYdqgN5GBG46V4_gQ350cn4P7EfobnORq_vc/edit#gid=0)
