@@ -29,6 +29,6 @@ before_script:
 script:
   - mvn clean install
   - cd gamification/
-  - gradle clean install
+  - gradle clean build --stacktrace
   - cd ../
   - gamification-ui/node_modules/.bin/karma start gamification-ui/karma.conf.js --no-auto-watch --single-run --reporters=dots --browsers=Firefox
