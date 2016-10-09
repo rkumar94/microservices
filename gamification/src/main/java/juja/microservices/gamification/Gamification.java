@@ -30,42 +30,23 @@
  */
 package juja.microservices.gamification;
 
-import java.io.PrintStream;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * Main entry point to application.
  * @author Viktor Kuchyn (kuchin.victor@gmail.com)
  * @version $Id$
  * @since 1.0
- * @todo Add web-server launch from main method in future
  */
-public final class Starter {
-
-    /**
-     * Printer.
-     */
-    private final transient PrintStream printer;
-
-    /**
-     * Constructor.
-     * @param prntr Printer
-     */
-    public Starter(final PrintStream prntr) {
-        this.printer = prntr;
-    }
-
+@SpringBootApplication
+public class Gamification {
     /**
      * Main method.
+     *
      * @param args Application arguments
      */
-    public static void main(final String...args) {
-        new Starter(System.out).start();
-    }
-
-    /**
-     * Starts the application.
-     */
-    public void start() {
-        this.printer.println("started application");
+    public static void main(final String... args) {
+        SpringApplication.run(Gamification.class, args);
     }
 }
