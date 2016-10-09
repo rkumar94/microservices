@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(consumes = "application/json", produces = "application/json")
-public class AdminController {
+public final class AdminController {
 
     @RequestMapping(value = "/admin/login", method = RequestMethod.POST)
     @ResponseBody

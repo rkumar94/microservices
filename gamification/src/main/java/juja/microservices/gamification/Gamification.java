@@ -35,11 +35,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * Main entry point to application.
+ *
  * @author Viktor Kuchyn (kuchin.victor@gmail.com)
  * @version $Id$
  * @since 1.0
  */
 @SpringBootApplication
+@SuppressWarnings("PMD.UseUtilityClass")
 public class Gamification {
     /**
      * Main method.

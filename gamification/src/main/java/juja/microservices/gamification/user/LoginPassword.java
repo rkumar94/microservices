@@ -12,8 +12,8 @@ import lombok.ToString;
 @EqualsAndHashCode(of = {"login", "password"})
 public final class LoginPassword {
 
-    private String login;
-    private String password;
+    private final String login;
+    private final String password;
 
     @JsonCreator
     public LoginPassword(@JsonProperty("login") final String login, @JsonProperty("pwd") final String password) {
@@ -21,10 +21,18 @@ public final class LoginPassword {
         this.password = password;
     }
 
+    /**
+     * User login.
+     * @return login.
+     */
     public String login() {
         return login;
     }
 
+    /**
+     * User password. @todo crypt password here.
+     * @return encrypted user password.
+     */
     public String password() {
         return password;
     }

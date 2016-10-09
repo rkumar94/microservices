@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @RunWith(SpringRunner.class)
 @WebMvcTest(AdminController.class)
-public class AdminAuthenticationIntegrationTest {
+public final class AdminAuthenticationIntegrationTest {
 
     @Inject
     private MockMvc mvc;
