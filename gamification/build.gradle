@@ -1,9 +1,20 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.1.RELEASE")
+    }
+}
+
+
 apply plugin: 'java'
-apply plugin: 'maven'
 apply plugin: 'pmd'
 apply plugin: 'checkstyle'
 apply plugin: 'findbugs'
 apply plugin: 'idea'
+apply plugin: 'spring-boot'
 
 group = 'ua.com.juja'
 version = '1.0-SNAPSHOT'
@@ -64,26 +75,14 @@ test {
 }
 
 dependencies {
-    compile group: 'org.springframework.data', name: 'spring-data-commons', version: '1.8.2.RELEASE'
-    compile group: 'org.springframework.data', name: 'spring-data-mongodb', version:'1.5.2.RELEASE'
-    compile group: 'org.springframework', name: 'spring-web', version:'4.2.5.RELEASE'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version:'2.0.1'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version:'2.0.1'
-    compile group: 'org.slf4j', name: 'slf4j-log4j12', version:'1.7.14'
-    compile group: 'com.sun.jersey', name: 'jersey-server', version:'1.8'
-    compile(group: 'com.sun.jersey', name: 'jersey-json', version:'1.8') {
-        exclude(module: 'stax-api')
+    compile("org.springframework.boot:spring-boot-starter-web") {
+        exclude module: "spring-boot-starter-tomcat"
     }
-    compile(group: 'com.sun.jersey.contribs', name: 'jersey-spring', version:'1.8') {
-        exclude(module: 'spring')
-        exclude(module: 'spring-core')
-        exclude(module: 'spring-web')
-        exclude(module: 'spring-beans')
-        exclude(module: 'spring-context')
-        exclude(module: 'spring-aop')
-    }
+    compile("org.springframework.boot:spring-boot-starter-jetty")
+    compile("org.springframework.boot:spring-boot-starter-data-mongodb")
     compile group: 'commons-lang', name: 'commons-lang', version:'2.6'
     compile group: 'javax.inject', name: 'javax.inject', version:'1'
+
     testCompile group: 'org.mockito', name: 'mockito-all', version:'1.10.19'
     testCompile group: 'junit', name: 'junit', version:'4.12'
     testCompile group: 'org.springframework', name: 'spring-test', version:'4.0.2.RELEASE'
