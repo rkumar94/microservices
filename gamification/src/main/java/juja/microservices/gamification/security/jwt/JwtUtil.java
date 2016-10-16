@@ -4,13 +4,14 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import juja.microservices.gamification.user.Authority;
 import juja.microservices.gamification.user.User;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.Set;
 
 /**
+ * Util class for generating and parsing of token.
+ *
  * @author olga kulykova email o.kulykova@gmail.com
  */
 @Component
@@ -33,13 +34,7 @@ public final class JwtUtil {
                     .parseClaimsJws(token)
                     .getBody();
 
-            User u = new User();
-            u.setUsername(body.getSubject());
-            u.setId((String) body.get("userId"));
-            u.setAuthorities((List<Authority>) body.get("role"));
-
-            return u;
-
+            return new User((String) body.get("userId"), body.getSubject(), (Set<String>) body.get("role"));
         } catch (JwtException | ClassCastException e) {
             return null;
         }

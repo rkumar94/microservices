@@ -3,7 +3,6 @@ package juja.microservices.gamification.security.jwt;
 import juja.microservices.gamification.security.exception.JwtTokenMalformedException;
 import juja.microservices.gamification.security.model.AuthenticatedUser;
 import juja.microservices.gamification.security.model.JwtAuthenticationToken;
-import juja.microservices.gamification.user.Authority;
 import juja.microservices.gamification.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Used for checking the token from the request and supply the UserDetails if the token is valid.
@@ -57,11 +57,7 @@ public final class JwtAuthenticationProvider extends AbstractUserDetailsAuthenti
         return new AuthenticatedUser(parsedUser.getId(), parsedUser.getUsername(), token, authorityList);
     }
 
-    private String getCommaSeparatedAuthorities(List<Authority> authorities) {
-        StringBuilder sb = new StringBuilder();
-        for (Authority authority : authorities) {
-            sb.append(authority).append(", ");
-        }
-        return sb.toString();
+    private String getCommaSeparatedAuthorities(Set<String> authorities) {
+        return authorities.toString().replace("[", "").replace("]", "").trim();
     }
 }

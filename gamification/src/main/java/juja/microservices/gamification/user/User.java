@@ -30,8 +30,9 @@
  */
 package juja.microservices.gamification.user;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
@@ -65,7 +66,7 @@ public class User {
     /**
      * List of authorities.
      */
-    private List<Authority> authorities;
+    private Set<String> authorities;
 
     /**
      * User persistence constructor.
@@ -83,27 +84,24 @@ public class User {
     }
 
     /**
+     * User persistence constructor.
+     * @param id Id
+     * @param username Username
+     * @param authorities Authorities
+     */
+    @PersistenceConstructor
+    public User(final String id, String username, Set<String> authorities) {
+        this.id = id;
+        this.username = username;
+        this.authorities = authorities;
+    }
+
+    /**
      * Get username.
      * @return Username
      */
     public final String getUsername() {
         return this.username;
-    }
-
-    /**
-     * Set username.
-     * @param name Username
-     */
-    public final void setUsername(final String name) {
-        this.username = name;
-    }
-
-    /**
-     * Set id.
-     * @param id Id
-     */
-    public final void setId(final String id) {
-        this.id = id;
     }
 
     /**
@@ -118,21 +116,13 @@ public class User {
      * Get authorities.
      * @return List of authorities
      */
-    public final List<Authority> getAuthorities() {
+    public final Set<String> getAuthorities() {
         return authorities;
-    }
-
-    /**
-     * Set authorities.
-     * @param authorities Authorities
-     */
-    public final void setAuthorities(List<Authority> authorities) {
-        this.authorities = authorities;
     }
 
     @Override
     public final boolean equals(final Object obj) {
-        boolean result = false;
+        boolean result;
         if (this == obj) {
             result = true;
         } else if (obj == null || getClass() != obj.getClass()) {
@@ -157,11 +147,11 @@ public class User {
 
     @Override
     public final String toString() {
-        final StringBuilder sbuilider = new StringBuilder(
+        final StringBuilder sbuilder = new StringBuilder(
             User.TOSTRING_CAPACITY
         ).append("User{id='").append(this.id).append('\'')
             .append(", username='").append(this.username).append('\'')
             .append('}');
-        return sbuilider.toString();
+        return sbuilder.toString();
     }
 }
