@@ -66,7 +66,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public final String createUser(final String username) {
-        final CommonUser user = new CommonUser(username);
+        final User user = new User(username);
         this.template.save(user);
         return user.getUsername();
     }
@@ -74,12 +74,12 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public final User getUser(final String id) {
         final Query query = Query.query(Criteria.where("_id").is(id));
-        return this.template.findOne(query, CommonUser.class);
+        return this.template.findOne(query, User.class);
     }
 
     @Override
     public final List<User> getUsers() {
-        final List<CommonUser>  users = this.template.findAll(CommonUser.class);
+        final List<User>  users = this.template.findAll(User.class);
         final List<User> result = new ArrayList<>(users.size());
         result.addAll(users);
         return result;

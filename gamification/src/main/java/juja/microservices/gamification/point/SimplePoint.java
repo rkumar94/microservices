@@ -32,6 +32,7 @@ package juja.microservices.gamification.point;
 
 import java.util.Date;
 import java.util.Objects;
+
 import juja.microservices.gamification.user.User;
 import org.springframework.data.annotation.Id;
 

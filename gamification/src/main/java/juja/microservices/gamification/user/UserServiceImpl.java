@@ -42,7 +42,7 @@ import org.springframework.stereotype.Component;
  * @since 1.0
  */
 @Component
-public class CommonUserService implements UserService {
+public class UserServiceImpl implements UserService {
 
     /**
      * UserRepository.
@@ -50,11 +50,11 @@ public class CommonUserService implements UserService {
     private final UserRepository repository;
 
     /**
-     * CommonUserService constructor.
+     * UserServiceImpl constructor.
      * @param repository User repository
      */
     @Inject
-    public CommonUserService(final UserRepository repository) {
+    public UserServiceImpl(final UserRepository repository) {
         this.repository = repository;
     }
 

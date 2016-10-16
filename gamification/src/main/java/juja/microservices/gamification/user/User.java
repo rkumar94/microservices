@@ -30,18 +30,138 @@
  */
 package juja.microservices.gamification.user;
 
+import java.util.List;
+import java.util.Objects;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
- * User interface.
+ * User entity.
  * @author Sergii Lisnychyi (ljore@ukr.net)
  * @version $Id$
  * @since 1.0
  */
-public interface User {
+@Document(collection = "users")
+public class User {
+
+    /**
+     * Capacity of String object interpretation.
+     */
+    public static final int TOSTRING_CAPACITY = 50;
+
+    /**
+     * Id field.
+     */
+    @Id
+    private String id;
+
+    /**
+     * Username field.
+     */
+    private String username;
+
+    /**
+     * List of authorities.
+     */
+    private List<Authority> authorities;
+
+    /**
+     * User persistence constructor.
+     */
+    @PersistenceConstructor
+    public User(){}
+
+    /**
+     * User persistence constructor.
+     * @param username Username
+     */
+    @PersistenceConstructor
+    public User(final String username) {
+        this.username = username;
+    }
 
     /**
      * Get username.
      * @return Username
      */
-    String getUsername();
+    public final String getUsername() {
+        return this.username;
+    }
 
+    /**
+     * Set username.
+     * @param name Username
+     */
+    public final void setUsername(final String name) {
+        this.username = name;
+    }
+
+    /**
+     * Set id.
+     * @param id Id
+     */
+    public final void setId(final String id) {
+        this.id = id;
+    }
+
+    /**
+     * Get id.
+     * @return Id
+     */
+    public final String getId() {
+        return this.id;
+    }
+
+    /**
+     * Get authorities.
+     * @return List of authorities
+     */
+    public List<Authority> getAuthorities() {
+        return authorities;
+    }
+
+    /**
+     * Set authorities.
+     * @param authorities Authorities
+     */
+    public void setAuthorities(List<Authority> authorities) {
+        this.authorities = authorities;
+    }
+
+    @Override
+    public final boolean equals(final Object obj) {
+        boolean result = false;
+        if (this == obj) {
+            result = true;
+        } else if (obj == null || getClass() != obj.getClass()) {
+            result = false;
+        } else {
+            final User user = (User) obj;
+            result = Objects.equals(this.id, user.id)
+                && Objects.equals(this.username, user.username);
+        }
+        return result;
+    }
+
+    @Override
+    public final int hashCode() {
+        final int prime = 17;
+        final int secprime = 37;
+        return new HashCodeBuilder(prime, secprime)
+            .append(this.id)
+            .append(this.username)
+            .toHashCode();
+    }
+
+    @Override
+    public final String toString() {
+        final StringBuilder sbuilider = new StringBuilder(
+            User.TOSTRING_CAPACITY
+        ).append("User{id='").append(this.id).append('\'')
+            .append(", username='").append(this.username).append('\'')
+            .append('}');
+        return sbuilider.toString();
+    }
 }

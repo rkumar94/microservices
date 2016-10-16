@@ -43,15 +43,15 @@ import org.springframework.data.mongodb.core.query.Query;
 import static org.hamcrest.CoreMatchers.is;
 
 /**
- * CommonUser repository test.
+ * User repository test.
  * @author Sergii Lisnychyi (ljore@ukr.net)
  * @version $Id$
  * @since 1.0
  */
-public class CommonUserRepositoryImplMongoImplTest {
+public class UserRepositoryImplMongoImplTest {
 
     /**
-     * CommonUser repository.
+     * User repository.
      */
     @InjectMocks
     private UserRepositoryImpl repository;
@@ -77,9 +77,9 @@ public class CommonUserRepositoryImplMongoImplTest {
     @Test
     public final void createUser() throws Exception {
         final String name = "name";
-        final CommonUser commonUser = new CommonUser(name);
+        final User user = new User(name);
         final String result = this.repository.createUser(name);
-        MatcherAssert.assertThat(commonUser.getUsername(), is(result));
+        MatcherAssert.assertThat(user.getUsername(), is(result));
     }
 
     /**
@@ -90,7 +90,7 @@ public class CommonUserRepositoryImplMongoImplTest {
         final String uuid = "_id";
         final Query query = Query.query(Criteria.where(uuid).is(uuid));
         this.repository.getUser(uuid);
-        Mockito.verify(this.templ, Mockito.times(1)).findOne(query, CommonUser.class);
+        Mockito.verify(this.templ, Mockito.times(1)).findOne(query, User.class);
     }
 
     /**
@@ -99,7 +99,7 @@ public class CommonUserRepositoryImplMongoImplTest {
     @Test
     public final void getUsersVerify() {
         this.repository.getUsers();
-        Mockito.verify(this.templ, Mockito.times(1)).findAll(CommonUser.class);
+        Mockito.verify(this.templ, Mockito.times(1)).findAll(User.class);
     }
 
 }
