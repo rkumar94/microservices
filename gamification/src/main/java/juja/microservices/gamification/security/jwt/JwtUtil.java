@@ -6,7 +6,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import juja.microservices.gamification.user.Authority;
 import juja.microservices.gamification.user.User;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,12 +14,13 @@ import java.util.List;
  * @author olga kulykova email o.kulykova@gmail.com
  */
 @Component
-public class JwtUtil {
+public final class JwtUtil {
 
-    private String secret = "mysecret";
+    private final String secret = "mysecret";
 
     /**
-     * Tries to parse specified String as a JWT token. If successful, returns User object with username, id and role prefilled (extracted from token).
+     * Tries to parse specified String as a JWT token. If successful, returns User object with username, id
+     * and role prefilled (extracted from token).
      * If unsuccessful (token is invalid or not containing all required user properties), simply returns null.
      *
      * @param token the JWT token to parse

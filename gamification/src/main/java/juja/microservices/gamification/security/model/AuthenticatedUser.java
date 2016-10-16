@@ -7,11 +7,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 /**
- * Holds the info for a authenticated user (Principal)
+ * Holds the info for a authenticated user (Principal).
  *
  * @author olga kulykova email o.kulykova@gmail.com
  */
-public class AuthenticatedUser implements UserDetails {
+public final class AuthenticatedUser implements UserDetails {
 
     /**
      * Id field.
@@ -29,7 +29,7 @@ public class AuthenticatedUser implements UserDetails {
     private final String token;
 
     /**
-     * Collection of granted authorities
+     * Collection of granted authorities.
      */
     private final Collection<? extends GrantedAuthority> authorities;
 

@@ -118,7 +118,7 @@ public class User {
      * Get authorities.
      * @return List of authorities
      */
-    public List<Authority> getAuthorities() {
+    public final List<Authority> getAuthorities() {
         return authorities;
     }
 
@@ -126,7 +126,7 @@ public class User {
      * Set authorities.
      * @param authorities Authorities
      */
-    public void setAuthorities(List<Authority> authorities) {
+    public final void setAuthorities(List<Authority> authorities) {
         this.authorities = authorities;
     }
 

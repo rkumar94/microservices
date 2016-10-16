@@ -28,27 +28,10 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-package juja.microservices.gamification;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Main entry point to application.
- *
- * @author Viktor Kuchyn (kuchin.victor@gmail.com)
- * @version $Id$
- * @since 1.0
+ * Package contains implemented or extended entities of Spring Security
+ * with JWT library.
+ * @author olga kulykova email o.kulykova@gmail.com
  */
-@SpringBootApplication
-@SuppressWarnings("PMD.UseUtilityClass")
-public class Gamification {
-    /**
-     * Main method.
-     *
-     * @param args Application arguments
-     */
-    public static void main(final String... args) {
-        SpringApplication.run(Gamification.class, args);
-    }
-}
+package juja.microservices.gamification.security.jwt;

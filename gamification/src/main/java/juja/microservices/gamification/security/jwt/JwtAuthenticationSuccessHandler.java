@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Just make sure nothing is done (REST API contains no pages)
+ * Just make sure nothing is done (REST API contains no pages).
  *
  * @author olga kulykova email o.kulykova@gmail.com
  */

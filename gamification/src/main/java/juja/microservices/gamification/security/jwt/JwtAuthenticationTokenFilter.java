@@ -2,7 +2,6 @@ package juja.microservices.gamification.security.jwt;
 
 import juja.microservices.gamification.security.exception.JwtTokenMissingException;
 import juja.microservices.gamification.security.model.JwtAuthenticationToken;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
@@ -14,20 +13,20 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Filter that orchestrates authentication by using supplied JWT token
+ * Filter that orchestrates authentication by using supplied JWT token.
  *
  * @author olga kulykova email o.kulykova@gmail.com
  */
-public class JwtAuthenticationTokenFilter extends AbstractAuthenticationProcessingFilter {
+public final class JwtAuthenticationTokenFilter extends AbstractAuthenticationProcessingFilter {
 
-    private String tokenHeader = "Autorization";
+    private final String tokenHeader = "Autorization";
 
     public JwtAuthenticationTokenFilter() {
         super("/**");
     }
 
     /**
-     * Attempt to authenticate request - pass over to another method to authenticate request headers
+     * Attempt to authenticate request - pass over to another method to authenticate request headers.
      *
      * @param request HTTP request
      * @param response HTTP response
@@ -49,7 +48,7 @@ public class JwtAuthenticationTokenFilter extends AbstractAuthenticationProcessi
     }
 
     /**
-     * Make sure the rest of the filter chain is satisfied
+     * Make sure the rest of the filter chain is satisfied.
      *
      * @param request HTTP request
      * @param response HTTP response
@@ -59,9 +58,22 @@ public class JwtAuthenticationTokenFilter extends AbstractAuthenticationProcessi
      * @throws ServletException
      */
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult)
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
+                                            FilterChain chain, Authentication authResult)
             throws IOException, ServletException {
         super.successfulAuthentication(request, response, chain, authResult);
         chain.doFilter(request, response);
+    }
+
+    /**
+     * Check if the request should be authenticated.
+     *
+     * @param request HTTP request
+     * @param response HTTP response
+     * @return true or false
+     */
+    @Override
+    protected boolean requiresAuthentication(HttpServletRequest request, HttpServletResponse response) {
+        return super.requiresAuthentication(request, response);
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
  *
  * @author olga kulykova email o.kulykova@gmail.com
  */
-public class JwtAuthenticationToken extends UsernamePasswordAuthenticationToken {
+public final class JwtAuthenticationToken extends UsernamePasswordAuthenticationToken {
 
     /**
      * Token field.

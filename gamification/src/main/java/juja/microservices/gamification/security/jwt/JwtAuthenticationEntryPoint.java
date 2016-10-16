@@ -16,10 +16,10 @@ import java.io.IOException;
  * @author olga kulykova email o.kulykova@gmail.com
  */
 @Component
-public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
+public final class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     /**
-     * This method is invoked when user tries to access a secured REST resource without supplying any credentials
+     * This method is invoked when user tries to access a secured REST resource without supplying any credentials.
      *
      * @param request HTTP request
      * @param response HTTP response
