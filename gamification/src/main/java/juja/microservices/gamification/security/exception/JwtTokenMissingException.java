@@ -8,7 +8,7 @@ import org.springframework.security.core.AuthenticationException;
  */
 public class JwtTokenMissingException extends AuthenticationException {
 
-    public JwtTokenMissingException(String msg) {
+    public JwtTokenMissingException(final String msg) {
         super(msg);
     }
 }

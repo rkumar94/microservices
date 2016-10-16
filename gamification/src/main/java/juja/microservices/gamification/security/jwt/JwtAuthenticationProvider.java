@@ -1,6 +1,5 @@
 package juja.microservices.gamification.security.jwt;
 
-import juja.microservices.gamification.security.exception.JwtTokenMalformedException;
 import juja.microservices.gamification.security.model.AuthenticatedUser;
 import juja.microservices.gamification.security.model.JwtAuthenticationToken;
 import juja.microservices.gamification.user.User;
@@ -29,9 +28,10 @@ public final class JwtAuthenticationProvider extends AbstractUserDetailsAuthenti
 
     @Override
     public boolean supports(Class<?> authentication) {
-        return (JwtAuthenticationToken.class.isAssignableFrom(authentication));
+        return JwtAuthenticationToken.class.isAssignableFrom(authentication);
     }
 
+    @SuppressWarnings("PMD.UncommentedEmptyMethodBody")
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails,
                                                   UsernamePasswordAuthenticationToken authentication)
@@ -45,10 +45,6 @@ public final class JwtAuthenticationProvider extends AbstractUserDetailsAuthenti
         String token = jwtAuthenticationToken.getToken();
 
         User parsedUser = jwtUtil.parseToken(token);
-
-        if (parsedUser == null) {
-            throw new JwtTokenMalformedException("JWT token is not valid");
-        }
 
         String commaSeparatedAuthorities = getCommaSeparatedAuthorities(parsedUser.getAuthorities());
         List<GrantedAuthority> authorityList =

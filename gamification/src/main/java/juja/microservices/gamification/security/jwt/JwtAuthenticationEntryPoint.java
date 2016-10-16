@@ -28,8 +28,8 @@ public final class JwtAuthenticationEntryPoint implements AuthenticationEntryPoi
      * @throws ServletException
      */
     @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response,
-                         AuthenticationException authException) throws IOException, ServletException {
+    public void commence(final HttpServletRequest request, final HttpServletResponse response,
+                         final AuthenticationException authException) throws IOException, ServletException {
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
     }
 }

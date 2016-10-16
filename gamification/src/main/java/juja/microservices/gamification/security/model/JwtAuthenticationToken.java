@@ -13,7 +13,7 @@ public final class JwtAuthenticationToken extends UsernamePasswordAuthentication
     /**
      * Token field.
      */
-    private String token;
+    private final String token;
 
     /**
      * Token constructor.

@@ -19,7 +19,7 @@ import java.io.IOException;
  */
 public final class JwtAuthenticationTokenFilter extends AbstractAuthenticationProcessingFilter {
 
-    private final String tokenHeader = "Autorization";
+    private static final String TOKEN_HEADER = "Autorization";
 
     public JwtAuthenticationTokenFilter() {
         super("/**");
@@ -38,7 +38,7 @@ public final class JwtAuthenticationTokenFilter extends AbstractAuthenticationPr
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
                                                 throws AuthenticationException, IOException, ServletException {
-        String header = request.getHeader(this.tokenHeader);
+        String header = request.getHeader(TOKEN_HEADER);
         if (header == null || !header.startsWith("Bearer ")) {
             throw new JwtTokenMissingException("No JWT token found in request headers");
         }
@@ -74,6 +74,6 @@ public final class JwtAuthenticationTokenFilter extends AbstractAuthenticationPr
      */
     @Override
     protected boolean requiresAuthentication(HttpServletRequest request, HttpServletResponse response) {
-        return super.requiresAuthentication(request, response);
+        return request.getHeader(TOKEN_HEADER) != null;
     }
 }

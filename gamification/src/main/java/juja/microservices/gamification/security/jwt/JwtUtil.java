@@ -4,7 +4,9 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import juja.microservices.gamification.security.exception.JwtTokenMalformedException;
 import juja.microservices.gamification.user.User;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
@@ -17,7 +19,7 @@ import java.util.Set;
 @Component
 public final class JwtUtil {
 
-    private final String secret = "mysecret";
+    private static final String SECRET = "mysecret";
 
     /**
      * Tries to parse specified String as a JWT token. If successful, returns User object with username, id
@@ -25,18 +27,19 @@ public final class JwtUtil {
      * If unsuccessful (token is invalid or not containing all required user properties), simply returns null.
      *
      * @param token the JWT token to parse
-     * @return the User object extracted from specified token or null if a token is invalid.
+     * @return the User object extracted from specified token or null if a token is invalid
+     * @throws AuthenticationException if there is an issue
      */
-    public User parseToken(String token) {
+    public User parseToken(String token) throws AuthenticationException {
         try {
             Claims body = Jwts.parser()
-                    .setSigningKey(secret)
+                    .setSigningKey(SECRET)
                     .parseClaimsJws(token)
                     .getBody();
 
             return new User((String) body.get("userId"), body.getSubject(), (Set<String>) body.get("role"));
         } catch (JwtException | ClassCastException e) {
-            return null;
+            throw (JwtTokenMalformedException) new JwtTokenMalformedException("JWT token is not valid").initCause(e);
         }
     }
 
@@ -49,12 +52,12 @@ public final class JwtUtil {
      */
     public String generateToken(User u) {
         Claims claims = Jwts.claims().setSubject(u.getUsername());
-        claims.put("userId", u.getId() + "");
+        claims.put("userId", u.getId());
         claims.put("role", u.getAuthorities().toArray());
 
         return Jwts.builder()
                 .setClaims(claims)
-                .signWith(SignatureAlgorithm.HS512, secret)
+                .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compact();
     }
 }

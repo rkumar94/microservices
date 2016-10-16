@@ -70,12 +70,6 @@ public class User {
 
     /**
      * User persistence constructor.
-     */
-    @PersistenceConstructor
-    public User(){}
-
-    /**
-     * User persistence constructor.
      * @param username Username
      */
     @PersistenceConstructor
