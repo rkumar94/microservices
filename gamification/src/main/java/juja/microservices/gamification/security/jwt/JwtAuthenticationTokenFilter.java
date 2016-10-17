@@ -36,14 +36,14 @@ public final class JwtAuthenticationTokenFilter extends AbstractAuthenticationPr
      * @throws ServletException
      */
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+    public Authentication attemptAuthentication(final HttpServletRequest request, final HttpServletResponse response)
                                                 throws AuthenticationException, IOException, ServletException {
-        String header = request.getHeader(TOKEN_HEADER);
+        final String header = request.getHeader(TOKEN_HEADER);
         if (header == null || !header.startsWith("Bearer ")) {
             throw new JwtTokenMissingException("No JWT token found in request headers");
         }
-        String authToken = header.substring(7);
-        JwtAuthenticationToken authRequest = new JwtAuthenticationToken(authToken);
+        final String authToken = header.substring(7);
+        final JwtAuthenticationToken authRequest = new JwtAuthenticationToken(authToken);
         return getAuthenticationManager().authenticate(authRequest);
     }
 
@@ -58,8 +58,8 @@ public final class JwtAuthenticationTokenFilter extends AbstractAuthenticationPr
      * @throws ServletException
      */
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
-                                            FilterChain chain, Authentication authResult)
+    protected void successfulAuthentication(final HttpServletRequest request, final HttpServletResponse response,
+                                            final FilterChain chain, final Authentication authResult)
             throws IOException, ServletException {
         super.successfulAuthentication(request, response, chain, authResult);
         chain.doFilter(request, response);
@@ -73,7 +73,7 @@ public final class JwtAuthenticationTokenFilter extends AbstractAuthenticationPr
      * @return true or false
      */
     @Override
-    protected boolean requiresAuthentication(HttpServletRequest request, HttpServletResponse response) {
+    protected boolean requiresAuthentication(final HttpServletRequest request, final HttpServletResponse response) {
         return request.getHeader(TOKEN_HEADER) != null;
     }
 }

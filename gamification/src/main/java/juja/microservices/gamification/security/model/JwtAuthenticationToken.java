@@ -19,7 +19,7 @@ public final class JwtAuthenticationToken extends UsernamePasswordAuthentication
      * Token constructor.
      * @param token Token
      */
-    public JwtAuthenticationToken(String token) {
+    public JwtAuthenticationToken(final String token) {
         super(null, null);
         this.token = token;
     }

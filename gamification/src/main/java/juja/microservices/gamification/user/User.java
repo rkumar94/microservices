@@ -61,7 +61,7 @@ public class User {
     /**
      * Username field.
      */
-    private String username;
+    private final String username;
 
     /**
      * List of authorities.
@@ -84,7 +84,7 @@ public class User {
      * @param authorities Authorities
      */
     @PersistenceConstructor
-    public User(final String id, String username, Set<String> authorities) {
+    public User(final String id, final String username, final Set<String> authorities) {
         this.id = id;
         this.username = username;
         this.authorities = authorities;

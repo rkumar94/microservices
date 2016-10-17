@@ -30,9 +30,9 @@ public final class JwtUtil {
      * @return the User object extracted from specified token or null if a token is invalid
      * @throws AuthenticationException if there is an issue
      */
-    public User parseToken(String token) throws AuthenticationException {
+    public User parseToken(final String token) throws AuthenticationException {
         try {
-            Claims body = Jwts.parser()
+            final Claims body = Jwts.parser()
                     .setSigningKey(SECRET)
                     .parseClaimsJws(token)
                     .getBody();
@@ -47,13 +47,13 @@ public final class JwtUtil {
      * Generates a JWT token containing username as subject, and userId and role as additional claims.
      * These properties are taken from the specified User object. Tokens validity is infinite.
      *
-     * @param u the user for which the token will be generated
+     * @param user the user for which the token will be generated
      * @return the JWT token
      */
-    public String generateToken(User u) {
-        Claims claims = Jwts.claims().setSubject(u.getUsername());
-        claims.put("userId", u.getId());
-        claims.put("role", u.getAuthorities().toArray());
+    public String generateToken(final User user) {
+        final Claims claims = Jwts.claims().setSubject(user.getUsername());
+        claims.put("userId", user.getId());
+        claims.put("role", user.getAuthorities().toArray());
 
         return Jwts.builder()
                 .setClaims(claims)

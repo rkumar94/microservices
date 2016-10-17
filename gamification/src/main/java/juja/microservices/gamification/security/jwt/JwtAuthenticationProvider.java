@@ -27,33 +27,33 @@ public final class JwtAuthenticationProvider extends AbstractUserDetailsAuthenti
     private JwtUtil jwtUtil;
 
     @Override
-    public boolean supports(Class<?> authentication) {
+    public boolean supports(final Class<?> authentication) {
         return JwtAuthenticationToken.class.isAssignableFrom(authentication);
     }
 
     @SuppressWarnings("PMD.UncommentedEmptyMethodBody")
     @Override
-    protected void additionalAuthenticationChecks(UserDetails userDetails,
-                                                  UsernamePasswordAuthenticationToken authentication)
+    protected void additionalAuthenticationChecks(final UserDetails userDetails,
+                                                  final UsernamePasswordAuthenticationToken authentication)
             throws AuthenticationException {
     }
 
     @Override
-    protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication)
+    protected UserDetails retrieveUser(final String username, final UsernamePasswordAuthenticationToken authentication)
             throws AuthenticationException {
-        JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) authentication;
-        String token = jwtAuthenticationToken.getToken();
+        final JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) authentication;
+        final String token = jwtAuthenticationToken.getToken();
 
-        User parsedUser = jwtUtil.parseToken(token);
+        final User parsedUser = jwtUtil.parseToken(token);
 
-        String commaSeparatedAuthorities = getCommaSeparatedAuthorities(parsedUser.getAuthorities());
-        List<GrantedAuthority> authorityList =
+        final String commaSeparatedAuthorities = getCommaSeparatedAuthorities(parsedUser.getAuthorities());
+        final List<GrantedAuthority> authorityList =
                 AuthorityUtils.commaSeparatedStringToAuthorityList(commaSeparatedAuthorities);
 
         return new AuthenticatedUser(parsedUser.getId(), parsedUser.getUsername(), token, authorityList);
     }
 
-    private String getCommaSeparatedAuthorities(Set<String> authorities) {
+    private String getCommaSeparatedAuthorities(final Set<String> authorities) {
         return authorities.toString().replace("[", "").replace("]", "").trim();
     }
 }

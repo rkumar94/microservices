@@ -40,8 +40,8 @@ public final class AuthenticatedUser implements UserDetails {
      * @param token Token
      * @param authorities Authorities
      */
-    public AuthenticatedUser(String id, String username, String token,
-                             Collection<? extends GrantedAuthority> authorities) {
+    public AuthenticatedUser(final String id, final String username, final String token,
+                             final Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.token = token;
