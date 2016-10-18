@@ -64,16 +64,4 @@ public final class JwtAuthenticationTokenFilter extends AbstractAuthenticationPr
         super.successfulAuthentication(request, response, chain, authResult);
         chain.doFilter(request, response);
     }
-
-    /**
-     * Check if the request should be authenticated.
-     *
-     * @param request HTTP request
-     * @param response HTTP response
-     * @return true or false
-     */
-    @Override
-    protected boolean requiresAuthentication(final HttpServletRequest request, final HttpServletResponse response) {
-        return request.getHeader(TOKEN_HEADER) != null;
-    }
 }

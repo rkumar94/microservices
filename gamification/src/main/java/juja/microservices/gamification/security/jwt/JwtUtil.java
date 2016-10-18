@@ -19,16 +19,16 @@ import java.util.Set;
 @Component
 public final class JwtUtil {
 
-    private static final String SECRET = "mysecret";
+    private static final String SECRET = "jujanior";
 
     /**
      * Tries to parse specified String as a JWT token. If successful, returns User object with username, id
      * and role prefilled (extracted from token).
-     * If unsuccessful (token is invalid or not containing all required user properties), simply returns null.
+     * If unsuccessful (token is invalid or not containing all required user properties), throws exception.
      *
      * @param token the JWT token to parse
-     * @return the User object extracted from specified token or null if a token is invalid
-     * @throws AuthenticationException if there is an issue
+     * @return the User object extracted from specified token if a token is valid
+     * @throws AuthenticationException if a token is invalid
      */
     public User parseToken(final String token) throws AuthenticationException {
         try {
