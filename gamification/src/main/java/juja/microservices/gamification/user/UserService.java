@@ -43,10 +43,10 @@ public interface UserService {
 
     /**
      * Create user.
-     * @param username Username
-     * @return Info about created user
+     * @param user User
+     * @return Created user
      */
-    String createUser(String username);
+    User createUser(User user);
 
     /**
      * Get user by id.
@@ -54,6 +54,13 @@ public interface UserService {
      * @return User
      */
     User getUser(String id);
+
+    /**
+     * Get user by username.
+     * @param username Username
+     * @return User
+     */
+    User getUserByUsername(String username);
 
     /**
      * Get list of all users.

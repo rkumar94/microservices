@@ -3,7 +3,6 @@ package juja.microservices.gamification.security.jwt;
 import juja.microservices.gamification.security.model.AuthenticatedUser;
 import juja.microservices.gamification.security.model.JwtAuthenticationToken;
 import juja.microservices.gamification.user.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
 import org.springframework.security.core.AuthenticationException;
@@ -12,6 +11,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
 import java.util.List;
 import java.util.Set;
 
@@ -23,8 +23,13 @@ import java.util.Set;
 @Component
 public final class JwtAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
-   @Autowired
-    private JwtUtil jwtUtil;
+    private final JwtUtil jwtUtil;
+
+    @Inject
+    public JwtAuthenticationProvider(final JwtUtil jwtUtil) {
+        super();
+        this.jwtUtil = jwtUtil;
+    }
 
     @Override
     public boolean supports(final Class<?> authentication) {

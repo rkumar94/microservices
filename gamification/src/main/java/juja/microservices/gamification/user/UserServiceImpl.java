@@ -30,9 +30,10 @@
  */
 package juja.microservices.gamification.user;
 
-import java.util.List;
-import javax.inject.Inject;
 import org.springframework.stereotype.Component;
+
+import javax.inject.Inject;
+import java.util.List;
 
 /**
  * Serving user actions.
@@ -49,18 +50,14 @@ public class UserServiceImpl implements UserService {
      */
     private final UserRepository repository;
 
-    /**
-     * UserServiceImpl constructor.
-     * @param repository User repository
-     */
     @Inject
     public UserServiceImpl(final UserRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public final String createUser(final String username) {
-        return this.repository.createUser(username);
+    public final User createUser(final User user) {
+        return this.repository.createUser(user);
     }
 
     @Override
@@ -69,8 +66,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public final User getUserByUsername(final String username) {
+        return this.repository.getUserByUsername(username);
+    }
+
+    @Override
     public final List<User> getUsers() {
         return this.repository.getUsers();
     }
-
 }

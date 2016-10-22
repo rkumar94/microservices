@@ -43,10 +43,10 @@ public interface UserRepository {
 
     /**
      * Create user.
-     * @param username Username
-     * @return Info about created user
+     * @param user User
+     * @return Created user
      */
-    String createUser(String username);
+    User createUser(User user);
 
     /**
      * Get user by uuid.
@@ -54,6 +54,13 @@ public interface UserRepository {
      * @return User
      */
     User getUser(String uuid);
+
+    /**
+     * Get user by username.
+     * @param username Username
+     * @return User
+     */
+    User getUserByUsername(String username);
 
     /**
      * Get list of all users.

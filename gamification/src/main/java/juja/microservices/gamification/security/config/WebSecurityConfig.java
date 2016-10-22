@@ -4,7 +4,6 @@ import juja.microservices.gamification.security.jwt.JwtAuthenticationEntryPoint;
 import juja.microservices.gamification.security.jwt.JwtAuthenticationProvider;
 import juja.microservices.gamification.security.jwt.JwtAuthenticationSuccessHandler;
 import juja.microservices.gamification.security.jwt.JwtAuthenticationTokenFilter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -19,6 +18,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import javax.inject.Inject;
 import java.util.Arrays;
 
 /**
@@ -29,15 +29,20 @@ import java.util.Arrays;
 @Configuration
 @EnableWebSecurity
 @EnableAutoConfiguration
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 @SuppressWarnings({"DesignForExtension", "PMD.SignatureDeclareThrowsException"})
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private JwtAuthenticationEntryPoint entryPoint;
+    private final JwtAuthenticationEntryPoint entryPoint;
 
-    @Autowired
-    private JwtAuthenticationProvider provider;
+    private final JwtAuthenticationProvider provider;
+
+    @Inject
+    public WebSecurityConfig(final JwtAuthenticationEntryPoint entryPoint, final JwtAuthenticationProvider provider) {
+        super();
+        this.entryPoint = entryPoint;
+        this.provider = provider;
+    }
 
     @Bean
     @Override
@@ -51,7 +56,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         authenticationTokenFilter.setAuthenticationManager(authenticationManager());
         authenticationTokenFilter.setAuthenticationSuccessHandler(new JwtAuthenticationSuccessHandler());
         return authenticationTokenFilter;
-
     }
 
     @Override
@@ -63,8 +67,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .authorizeRequests().antMatchers("/admin/login")
-                .permitAll()
+                .authorizeRequests()
+                .antMatchers("/admin/*").anonymous()
+               /* .permitAll()*/
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(entryPoint)

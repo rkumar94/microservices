@@ -33,6 +33,8 @@ package juja.microservices.gamification.user;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
@@ -56,7 +58,7 @@ public class User {
      * Id field.
      */
     @Id
-    private String id;
+    private final String id;
 
     /**
      * Username field.
@@ -66,16 +68,7 @@ public class User {
     /**
      * List of authorities.
      */
-    private Set<String> authorities;
-
-    /**
-     * User persistence constructor.
-     * @param username Username
-     */
-    @PersistenceConstructor
-    public User(final String username) {
-        this.username = username;
-    }
+    private final Set<String> authorities;
 
     /**
      * User persistence constructor.
@@ -84,7 +77,9 @@ public class User {
      * @param authorities Authorities
      */
     @PersistenceConstructor
-    public User(final String id, final String username, final Set<String> authorities) {
+    @JsonCreator
+    public User(@JsonProperty ("id") final String id, @JsonProperty ("username") final String username,
+                @JsonProperty ("authorities") final Set<String> authorities) {
         this.id = id;
         this.username = username;
         this.authorities = authorities;
