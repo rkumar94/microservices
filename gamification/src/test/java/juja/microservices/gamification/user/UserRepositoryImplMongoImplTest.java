@@ -27,7 +27,7 @@
  * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
- *//*
+ */
 
 package juja.microservices.gamification.user;
 
@@ -47,47 +47,42 @@ import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.is;
 
-*/
 /**
  * User repository test.
  * @author Sergii Lisnychyi (ljore@ukr.net)
  * @version $Id$
  * @since 1.0
- *//*
+ */
 
 public class UserRepositoryImplMongoImplTest {
 
-    */
-/**
+    /**
      * User repository.
-     *//*
+     */
 
     @InjectMocks
     private UserRepositoryImpl repository;
 
-    */
-/**
+    /**
      * Mongo templ.
-     *//*
+     */
 
     @Mock
     private MongoTemplate templ;
 
-    */
-/**
+    /**
      * Init mocks.
-     *//*
+     */
 
     @Before
     public final void init() {
         MockitoAnnotations.initMocks(this);
     }
 
-    */
-/**
+    /**
      * Create user test.
      * @throws Exception if there is an issue.
-     *//*
+     */
 
     @Test
     public final void createUser() throws Exception {
@@ -100,10 +95,9 @@ public class UserRepositoryImplMongoImplTest {
         MatcherAssert.assertThat(user, is(result));
     }
 
-    */
-/**
+    /**
      * Get user verify.
-     *//*
+     */
 
     @Test
     public final void getUserVerify() {
@@ -113,16 +107,13 @@ public class UserRepositoryImplMongoImplTest {
         Mockito.verify(this.templ, Mockito.times(1)).findOne(query, User.class);
     }
 
-    */
-/**
+    /**
      * Get users verify.
-     *//*
+     */
 
     @Test
     public final void getUsersVerify() {
         this.repository.getUsers();
         Mockito.verify(this.templ, Mockito.times(1)).findAll(User.class);
     }
-
 }
-*/

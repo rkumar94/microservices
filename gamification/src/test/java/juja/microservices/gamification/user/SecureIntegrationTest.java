@@ -1,4 +1,3 @@
-/*
 package juja.microservices.gamification.user;
 
 import juja.microservices.gamification.Gamification;
@@ -10,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -22,21 +22,20 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-*/
 /**
  * Integration test of authentication.
  *
  * @author olga kulykova email o.kulykova@gmail.com
- *//*
+ */
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {Gamification.class, WebSecurityConfig.class})
+@TestPropertySource(locations = "classpath:test.properties")
 public final class SecureIntegrationTest {
 
-    */
-/**
+    /**
      * Web application context.
-     *//*
+     */
 
     @Inject
     private WebApplicationContext context;
@@ -44,17 +43,15 @@ public final class SecureIntegrationTest {
     @Inject
     private UserServiceImpl service;
 
-    */
-/**
+    /**
      * Mock MVC.
-     *//*
+     */
 
     private MockMvc mockMvc;
 
-    */
-/**
+    /**
      * Create mock MVC with setting up of application context and Spring Security.
-     *//*
+     */
 
     @Before
     public void setUp() {
@@ -67,21 +64,19 @@ public final class SecureIntegrationTest {
         service.createUser(user);
     }
 
-    */
-/**
+    /**
      * Clear context of Security context holder.
-     *//*
+     */
 
     @After
     public void close() {
         SecurityContextHolder.clearContext();
     }
 
-    */
-/**
+    /**
      * Test authentication of admin by login and password.
      * @throws Exception if there is an issue.
-     *//*
+     */
 
     @Test
     public void authenticateAdminByLoginPassword() throws Exception {
@@ -91,4 +86,3 @@ public final class SecureIntegrationTest {
         ).andExpect(status().isOk());
     }
 }
-*/

@@ -49,6 +49,7 @@ import javax.inject.Inject;
  * @since 1.0
  */
 @Repository
+@SuppressWarnings({"DesignForExtension"})
 public class UserRepositoryImpl implements UserRepository {
 
     /**
@@ -62,25 +63,25 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public final User createUser(final User user) {
+    public User createUser(final User user) {
         this.template.save(user);
         return user;
     }
 
     @Override
-    public final User getUser(final String id) {
+    public User getUser(final String id) {
         final Query query = Query.query(Criteria.where("_id").is(id));
         return this.template.findOne(query, User.class);
     }
 
     @Override
-    public final User getUserByUsername(final String username) {
-        final Query query = Query.query(Criteria.where("_username").is(username));
+    public User getUserByUsername(final String username) {
+        final Query query = Query.query(Criteria.where("username").is(username));
         return this.template.findOne(query, User.class);
     }
 
     @Override
-    public final List<User> getUsers() {
+    public List<User> getUsers() {
         final List<User>  users = this.template.findAll(User.class);
         final List<User> result = new ArrayList<>(users.size());
         result.addAll(users);
