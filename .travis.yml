@@ -28,7 +28,7 @@ before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
   - sleep 15
-  - mongo mongotest --eval 'db.addUser("test", "test");'
+  - mongo mongotest --eval 'db.createUser({user:"test", pwd:"test", roles:[{role:"dbAdmin", db:"mongotest"}]});'
 script:
   - mvn clean install
   - cd gamification/
