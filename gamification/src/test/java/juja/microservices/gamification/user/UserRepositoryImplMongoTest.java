@@ -54,7 +54,7 @@ import static org.hamcrest.CoreMatchers.is;
  * @since 1.0
  */
 
-public class UserRepositoryImplMongoImplTest {
+public class UserRepositoryImplMongoTest {
 
     /**
      * User repository.

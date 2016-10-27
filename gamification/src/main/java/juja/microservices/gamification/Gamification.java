@@ -30,8 +30,14 @@
  */
 package juja.microservices.gamification;
 
+import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
+import juja.microservices.gamification.user.UserRepositoryImpl;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.mongodb.core.MongoTemplate;
 
 /**
  * Main entry point to application.
@@ -41,14 +47,52 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 1.0
  */
 @SpringBootApplication
-@SuppressWarnings("PMD.UseUtilityClass")
+@SuppressWarnings({"PMD.UseUtilityClass", "DesignForExtension"})
 public class Gamification {
+
+    /**
+     * Value of host from application.properties.
+     */
+    @Value("${spring.data.mongodb.host}")
+    private String host;
+
+    /**
+     * Value of database name from application.properties.
+     */
+    @Value("${spring.data.mongodb.database}")
+    private String database;
+
     /**
      * Main method.
+     * Entry point for SpringBoot application.
      *
      * @param args Application arguments
      */
     public static void main(final String... args) {
         SpringApplication.run(Gamification.class, args);
+    }
+
+    /**
+     * Creation of Mongo bean.
+     * @return Mongo
+     */
+    public @Bean Mongo mongo() {
+        return new MongoClient(host);
+    }
+
+    /**
+     * Creation of MongoTemplate bean.
+     * @return MongoTemplate
+     */
+    public @Bean MongoTemplate mongoTemplate() {
+        return new MongoTemplate(mongo(), database);
+    }
+
+    /**
+     * Creation of UserRepositoryImpl bean.
+     * @return UserRepositoryImpl
+     */
+    public @Bean UserRepositoryImpl userRepository() {
+        return new UserRepositoryImpl(mongoTemplate());
     }
 }

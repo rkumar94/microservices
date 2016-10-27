@@ -31,15 +31,12 @@
 
 package juja.microservices.gamification.user;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.stereotype.Repository;
 
-import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User custom repository implementation.
@@ -48,8 +45,6 @@ import javax.inject.Inject;
  * @version $Id$
  * @since 1.0
  */
-@Repository
-@SuppressWarnings({"DesignForExtension"})
 public class UserRepositoryImpl implements UserRepository {
 
     /**
@@ -57,31 +52,30 @@ public class UserRepositoryImpl implements UserRepository {
      */
     private final MongoTemplate template;
 
-    @Inject
     public UserRepositoryImpl(final MongoTemplate template) {
         this.template = template;
     }
 
     @Override
-    public User createUser(final User user) {
+    public final User createUser(final User user) {
         this.template.save(user);
         return user;
     }
 
     @Override
-    public User getUser(final String id) {
+    public final User getUser(final String id) {
         final Query query = Query.query(Criteria.where("_id").is(id));
         return this.template.findOne(query, User.class);
     }
 
     @Override
-    public User getUserByUsername(final String username) {
+    public final User getUserByUsername(final String username) {
         final Query query = Query.query(Criteria.where("username").is(username));
         return this.template.findOne(query, User.class);
     }
 
     @Override
-    public List<User> getUsers() {
+    public final List<User> getUsers() {
         final List<User>  users = this.template.findAll(User.class);
         final List<User> result = new ArrayList<>(users.size());
         result.addAll(users);
