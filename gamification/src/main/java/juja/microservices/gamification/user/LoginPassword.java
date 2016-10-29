@@ -25,15 +25,15 @@ public final class LoginPassword {
      * User login.
      * @return login.
      */
-    public String login() {
+    public String getLogin() {
         return login;
     }
 
     /**
-     * User password. @todo crypt password here.
+     * User password.
      * @return encrypted user password.
      */
-    public String password() {
+    public String getPassword() {
         return password;
     }
 }

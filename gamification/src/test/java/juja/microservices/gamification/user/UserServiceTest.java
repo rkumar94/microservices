@@ -15,14 +15,27 @@ import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.is;
 
+/**
+ * User service test.
+ *
+ * @author olga kulykova email o.kulykova@gmail.com
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {Gamification.class})
 @TestPropertySource(locations = "classpath:test.properties")
 public class UserServiceTest {
 
+    /**
+     * User service.
+     */
     @Inject
     private UserService service;
 
+    /**
+     * Create user and get user by username.
+     * Test if these users are matched.
+     * @throws Exception if there is an issue.
+     */
     @Test
     public final void createAndGetUserByUsername() throws Exception {
         final String id = "";
@@ -39,6 +52,10 @@ public class UserServiceTest {
         MatcherAssert.assertThat(user, is(createdUser));
     }
 
+    /**
+     * Get user by id verify.
+     * @throws Exception if there is an issue.
+     */
     @Test
     public final void getUserById() throws Exception {
         final List<User> users = service.getUsers();

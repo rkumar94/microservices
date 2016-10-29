@@ -32,6 +32,7 @@ package juja.microservices.gamification;
 
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
+import juja.microservices.gamification.user.LoginPasswordRepositoryDefault;
 import juja.microservices.gamification.user.UserRepositoryImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -94,5 +95,13 @@ public class Gamification {
      */
     public @Bean UserRepositoryImpl userRepository() {
         return new UserRepositoryImpl(mongoTemplate());
+    }
+
+    /**
+     * Creation of LoginPasswordRepositoryDefault bean.
+     * @return LoginPasswordRepositoryDefault
+     */
+    public @Bean LoginPasswordRepositoryDefault loginPasswordRepository() {
+        return new LoginPasswordRepositoryDefault(mongoTemplate());
     }
 }

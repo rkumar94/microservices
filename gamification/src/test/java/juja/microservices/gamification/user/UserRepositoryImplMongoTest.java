@@ -53,27 +53,23 @@ import static org.hamcrest.CoreMatchers.is;
  * @version $Id$
  * @since 1.0
  */
-
 public class UserRepositoryImplMongoTest {
 
     /**
      * User repository.
      */
-
     @InjectMocks
     private UserRepositoryImpl repository;
 
     /**
      * Mongo templ.
      */
-
     @Mock
     private MongoTemplate templ;
 
     /**
      * Init mocks.
      */
-
     @Before
     public final void init() {
         MockitoAnnotations.initMocks(this);
@@ -83,7 +79,6 @@ public class UserRepositoryImplMongoTest {
      * Create user test.
      * @throws Exception if there is an issue.
      */
-
     @Test
     public final void createUser() throws Exception {
         final String id = "_id";
@@ -98,7 +93,6 @@ public class UserRepositoryImplMongoTest {
     /**
      * Get user verify.
      */
-
     @Test
     public final void getUserVerify() {
         final String uuid = "_id";
@@ -110,7 +104,6 @@ public class UserRepositoryImplMongoTest {
     /**
      * Get users verify.
      */
-
     @Test
     public final void getUsersVerify() {
         this.repository.getUsers();

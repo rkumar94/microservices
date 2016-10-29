@@ -27,7 +27,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  *
  * @author olga kulykova email o.kulykova@gmail.com
  */
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {Gamification.class, WebSecurityConfig.class})
 @TestPropertySource(locations = "classpath:test.properties")
@@ -36,23 +35,30 @@ public final class SecureIntegrationTest {
     /**
      * Web application context.
      */
-
     @Inject
     private WebApplicationContext context;
 
+    /**
+     * User service.
+     */
     @Inject
     private UserServiceImpl service;
 
     /**
+     * LoginPassword service.
+     */
+    @Inject
+    private LoginPasswordService loginPasswordService;
+
+    /**
      * Mock MVC.
      */
-
     private MockMvc mockMvc;
 
     /**
      * Create mock MVC with setting up of application context and Spring Security.
+     * Create User and LoginPassword.
      */
-
     @Before
     public void setUp() {
         mockMvc = MockMvcBuilders.webAppContextSetup(context)
@@ -62,27 +68,39 @@ public final class SecureIntegrationTest {
         authorities.add(AuthorityName.ROLE_ADMIN.toString());
         final User user = new User("_id", "juja", authorities);
         service.createUser(user);
+        final LoginPassword loginPassword = new LoginPassword("juja", "ajuj");
+        loginPasswordService.createLoginPassword(loginPassword);
     }
 
     /**
      * Clear context of Security context holder.
      */
-
     @After
     public void close() {
         SecurityContextHolder.clearContext();
     }
 
     /**
-     * Test authentication of admin by login and password.
+     * Test authentication of admin if login and password are exist.
      * @throws Exception if there is an issue.
      */
-
     @Test
-    public void authenticateAdminByLoginPassword() throws Exception {
+    public void authenticateAdminByLoginPasswordSuccessful() throws Exception {
         mockMvc.perform(post("/admin/login")
                         .content("{\"login\":\"juja\", \"pwd\":\"ajuj\"}")
                         .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isOk());
+    }
+
+    /**
+     * Test authentication of admin if login and password are not exist or empty.
+     * @throws Exception if there is an issue.
+     */
+    @Test
+    public void authenticateAdminByLoginPasswordUnsuccessful() throws Exception {
+        mockMvc.perform(post("/admin/login")
+                        .content("{\"login\":\"\", \"pwd\":\"\"}")
+                        .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isUnauthorized());
     }
 }
