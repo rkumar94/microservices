@@ -40,8 +40,12 @@ public final class AdminController {
             response = new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         } else {
             final User user = userService.getUserByUsername(login);
-            final String token = util.generateToken(user);
-            response = ResponseEntity.ok(token);
+            if (user == null) {
+                response = new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            } else {
+                final String token = util.generateToken(user);
+                response = ResponseEntity.ok(token);
+            }
         }
         return response;
     }
