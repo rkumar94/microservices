@@ -43,8 +43,10 @@ public class LoginPasswordRepositoryDefaultTest {
     @Test
     public final void getLoginPassword() throws Exception {
         final String login = "juja";
-        final Query query = Query.query(Criteria.where("login").is(login));
-        this.repository.getLoginPassword(login);
+        final String password = "ajuj";
+        final LoginPassword loginPassword = new LoginPassword(login, password);
+        final Query query = Query.query(Criteria.where("login").is(login).and("password").is(password));
+        this.repository.getLoginPassword(loginPassword);
         Mockito.verify(this.templ, Mockito.times(1)).findOne(query, LoginPassword.class);
     }
 }

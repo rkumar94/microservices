@@ -8,11 +8,11 @@ package juja.microservices.gamification.user;
 public interface LoginPasswordService {
 
     /**
-     * Get LoginPassword by login.
-     * @param login Login
+     * Get LoginPassword by login and password.
+     * @param loginPassword LoginPassword
      * @return LoginPassword
      */
-    LoginPassword getLoginPassword(String login);
+    LoginPassword getLoginPassword(LoginPassword loginPassword);
 
     /**
      * Create LoginPassword.

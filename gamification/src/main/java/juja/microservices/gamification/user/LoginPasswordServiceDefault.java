@@ -1,5 +1,6 @@
 package juja.microservices.gamification.user;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
@@ -23,22 +24,25 @@ public class LoginPasswordServiceDefault implements LoginPasswordService {
     }
 
     /**
-     * Get LoginPassword by login.
-     * @param login Login
+     * Get encrypted LoginPassword by login and password.
+     * @param loginPassword LoginPassword
      * @return LoginPassword
      */
     @Override
-    public final LoginPassword getLoginPassword(final String login) {
-        return repository.getLoginPassword(login);
+    public final LoginPassword getLoginPassword(final LoginPassword loginPassword) {
+        return repository.getLoginPassword(loginPassword);
     }
 
     /**
-     * Create LoginPassword.
-     * @param loginPassword LoginPassword @todo crypt password here.
+     * Create encrypted LoginPassword.
+     * @param loginPassword LoginPassword
      * @return LoginPassword
      */
     @Override
     public final LoginPassword createLoginPassword(final LoginPassword loginPassword) {
-        return repository.createLoginPassword(loginPassword);
+        //todo It's temporary place for password encrypting, replace to controller
+        final LoginPassword encryptedLoginPassword = new LoginPassword(loginPassword.getLogin(),
+                DigestUtils.md5Hex(loginPassword.getPassword()));
+        return repository.createLoginPassword(encryptedLoginPassword);
     }
 }

@@ -21,13 +21,14 @@ public class LoginPasswordRepositoryDefault implements LoginPasswordRepository {
     }
 
     /**
-     * Get LoginPassword by login.
-     * @param login Login
+     * Get LoginPassword by login and password.
+     * @param loginPassword LoginPassword
      * @return LoginPassword
      */
     @Override
-    public final LoginPassword getLoginPassword(final String login) {
-        final Query query = Query.query(Criteria.where("login").is(login));
+    public final LoginPassword getLoginPassword(final LoginPassword loginPassword) {
+        final Query query = Query.query(Criteria.where("login").is(loginPassword.getLogin())
+                .and("password").is(loginPassword.getPassword()));
         return this.template.findOne(query, LoginPassword.class);
     }
 

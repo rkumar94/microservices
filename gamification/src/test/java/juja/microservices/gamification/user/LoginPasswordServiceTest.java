@@ -1,6 +1,7 @@
 package juja.microservices.gamification.user;
 
 import juja.microservices.gamification.Gamification;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,9 +38,10 @@ public class LoginPasswordServiceTest {
     public final void createAndGetLoginPassword()throws Exception {
         final LoginPassword loginPassword = new LoginPassword("juja", "ajuj");
         LoginPassword result = service.createLoginPassword(loginPassword);
-        MatcherAssert.assertThat(loginPassword, is(result));
+        final LoginPassword encryptedLoginPassword = new LoginPassword("juja", DigestUtils.md5Hex("ajuj"));
+        MatcherAssert.assertThat(encryptedLoginPassword, is(result));
 
-        result = service.getLoginPassword(loginPassword.getLogin());
-        MatcherAssert.assertThat(loginPassword, is(result));
+        result = service.getLoginPassword(encryptedLoginPassword);
+        MatcherAssert.assertThat(encryptedLoginPassword, is(result));
     }
 }

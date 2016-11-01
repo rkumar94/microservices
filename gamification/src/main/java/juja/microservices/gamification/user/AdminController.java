@@ -1,6 +1,7 @@
 package juja.microservices.gamification.user;
 
 import juja.microservices.gamification.security.jwt.JwtUtil;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,7 +36,8 @@ public final class AdminController {
     public ResponseEntity<?> authenticate(@RequestBody final LoginPassword credentials) {
         final ResponseEntity<?> response;
         final String login = credentials.getLogin();
-        final LoginPassword loginPassword = loginPasswordService.getLoginPassword(login);
+        final LoginPassword encryptedCredentials = new LoginPassword(login, encryptPassword(credentials.getPassword()));
+        final LoginPassword loginPassword = loginPasswordService.getLoginPassword(encryptedCredentials);
         if (loginPassword == null) {
             response = new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         } else {
@@ -48,6 +50,10 @@ public final class AdminController {
             }
         }
         return response;
+    }
+
+    private String encryptPassword(final String password) {
+        return DigestUtils.md5Hex(password);
     }
 
     @RequestMapping(value = "/admin/user", method = RequestMethod.POST)
