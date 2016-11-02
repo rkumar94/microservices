@@ -14,6 +14,7 @@ import javax.inject.Inject;
 
 /**
  * @author viktor email kuchin.victor@gmail.com
+ * @author olga kulykova email o.kulykova@gmail.com
  */
 @RestController
 @RequestMapping(consumes = "application/json", produces = "application/json")
@@ -31,6 +32,12 @@ public final class AdminController {
         this.util = util;
     }
 
+    /**
+     * Authenticate admin by login and password.
+     * Check if LoginPassword and user exist in database.
+     * @param credentials LoginPassword
+     * @return ResponseEntity
+     */
     @RequestMapping(value = "/admin/login", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<?> authenticate(@RequestBody final LoginPassword credentials) {

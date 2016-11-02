@@ -38,6 +38,7 @@ public class JujacoreProgressServiceIntegrationTest {
         );
     }
 
+    @Ignore
     @Test
     public void fetchCodesFromRealSpreadsheet() throws Exception {
         final ProgressService service = JujacoreProgressServiceIntegrationTest
@@ -51,6 +52,7 @@ public class JujacoreProgressServiceIntegrationTest {
         );
     }
 
+    @Ignore
     @Test
     public void markProgressForUser() throws Exception {
         final ProgressService service = JujacoreProgressServiceIntegrationTest
