@@ -81,7 +81,7 @@ public final class SecureIntegrationTest {
     }
 
     /**
-     * Test authentication of admin if login and password are exist.
+     * Test authentication of admin if login and password exist.
      * @throws Exception if there is an issue.
      */
     @Test
@@ -93,13 +93,27 @@ public final class SecureIntegrationTest {
     }
 
     /**
-     * Test authentication of admin if login and password are not exist or empty.
+     * Test authentication of admin if login and password don't exist or are empty.
      * @throws Exception if there is an issue.
      */
     @Test
-    public void authenticateAdminByLoginPasswordUnsuccessful() throws Exception {
+    public void authenticateAdminIfLoginPasswordWrong() throws Exception {
         mockMvc.perform(post("/admin/login")
                         .content("{\"login\":\"\", \"pwd\":\"\"}")
+                        .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isUnauthorized());
+    }
+
+    /**
+     * Test authentication of admin if login and password exist but user doesn't.
+     * @throws Exception
+     */
+    @Test
+    public void authenticateAdminIfUserDoesntExists() throws Exception {
+        final LoginPassword loginPassword = new LoginPassword("cracker", "cookie");
+        loginPasswordService.createLoginPassword(loginPassword);
+        mockMvc.perform(post("/admin/login")
+                        .content("{\"login\":\"cracker\", \"pwd\":\"cookie\"}")
                         .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isUnauthorized());
     }
